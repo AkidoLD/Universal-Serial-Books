@@ -9,22 +9,42 @@
             <div class=<?=$this->blockName?>>
                 <?=$this->blockName?>
             </div>  
+            <style>
+                <?='.'.$this->blockName?>{
+                    display : inline;
+                }
+            </style>
             <?php
         }
         public function hide(){
-            if ($this->visible){
-                ?>
-                <style>
-                    <?='.'.$this->blockName?>{
-                        display : none;
-                    }
-                </style>
-                <?php
-            } else {
-                return;
-            }
+            ?>
+            <style>
+                <?='.'.$this->blockName?>{
+                    display : none;
+                }
+            </style>
+            <?php
+        }
+        public function enable(){
+            ?>
+            <style>
+                <?='.'.$this->blockName?>{
+                    color : black;
+                }
+            </style>
+            <?php
+        }
+        public function disable(){
+            ?>
+            <style>
+                <?='.'.$this->blockName?>{
+                    color: gray;
+                }
+            </style>
+            <?php
         }
     }
     $comp = new ComponentTest;
+    $comp->disable();
     $comp->render();
-    $comp->hide();
+    

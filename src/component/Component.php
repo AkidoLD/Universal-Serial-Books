@@ -7,7 +7,6 @@
         protected string $name;
         protected string $id;
         protected array $classes;
-        protected array $attributes;
         protected string $blockName;  
         protected array $elements;
         protected array $modifiers;
@@ -16,14 +15,14 @@
         protected array $childs;
         protected Component $parent;
 
-        public function __construct(string $blockName, array $class = ['component'], array $attributes = []) {
+        public function __construct(string $blockName, array $class = ['component']) {
             $this->classes = $class;
-            $this->attributes = $attributes;
             $this->blockName = $blockName;
             $this->elements = [];
             $this->modifiers = [];
             $this->workable = true;
             $this->visible = true;
+            $this->name = $blockName;
         }
         
         /**
@@ -51,23 +50,6 @@
          */
         public function addClasses(array $addedClasses){
             array_push($this->classes, $addedClasses);
-        }
-        /**
-         * Function used to set attributes of current component
-         * @param array $newAttributes array of attributes to set
-         * @return void
-         */
-        public function setAttributes(array $newAttributes){
-            $this->attributes = $newAttributes;
-        }
-
-        /**
-         * Function used to add attributes to current component
-         * @param array $addedAttributes
-         * @return void
-         */
-        public function addAttributes(array $addedAttributes){
-            array_push($this->attributes, $addedAttributes);
         }
 
         /**
@@ -161,22 +143,23 @@
         public function getName(): string{
             return $this->name;
         }
-        // /**
-        //  * Function used to make visible the current component
-        //  * @return void
-        //  */
-        // abstract public function render();
+        /**
+         * Function used to make visible the current component
+         * @return void
+         */
+        abstract public function render();
 
-        // /**
-        //  * Function used to make the current component not workable
-        //  * @return void
-        //  */
-        // abstract public function disable();
-        // /**
-        //  * Function used to make the current component workable
-        //  * @return void
-        //  */
-        // abstract public function enable();
+        /**
+         * Function used to make the current component not workable
+         * @return void
+         */
+        abstract public function disable();
+
+        /**
+         * Function used to make the current component workable
+         * @return void
+         */
+        abstract public function enable();
 
         // /**
         //  * Function used to hide the current component
