@@ -16,8 +16,7 @@ class Person{
         ?DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null,
-    )
-    {   
+    ){   
         $this->name = $name;
         $this->surname = $surname;
         $this->birthDate = $birthDate;
