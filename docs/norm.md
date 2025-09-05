@@ -36,7 +36,7 @@ En PHP, il existe des **standards officiels** appelés **PSR** (*PHP Standards R
 * Accolades : sur la **même ligne**
 
 ```php
-class UserController
+class UserControlle
 {
     public function getUser($id)
     {
