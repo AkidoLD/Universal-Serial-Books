@@ -12,6 +12,7 @@ use Enums\BookGender;
 class Book {
     private string $title;
     private Person $author;
+    private ?string $cover;
     private ?DateTime $publicationDate;
     private ?string $isbn;
     private ?int $pages;
@@ -26,6 +27,7 @@ class Book {
      * @param string|null $isbn The ISBN code (optional)
      * @param int|null $pages Number of pages (optional)
      * @param BookGender|null $genre The genre of the book (optional)
+     * @param ?string $cover The cover of the book 
      */
     public function __construct(
         string $title,
@@ -33,7 +35,8 @@ class Book {
         ?DateTime $publicationDate = null,
         ?string $isbn = null,
         ?int $pages = null,
-        ?BookGender $genre = null
+        ?BookGender $genre = null,
+        ?string $cover = null,
     ) {
         $this->title = $title;
         $this->author = $author;
