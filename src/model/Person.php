@@ -1,17 +1,19 @@
 <?php
-require_once __DIR__."/Gender.php";
+require_once __DIR__."/../Enums/Gender.php";
+
+use Enums\Gender;
 /**
  * The basic representation of a person
  */
 class Person{
-    private ?string $name;
+    private string $name;
     private ?string $surname;
     private ?DateTime $birthDate;
     private ?Gender $gender;
     private ?int $height;
 
     public function __construct(
-        ?string $name = 'default',
+        string $name = 'default',
         ?string $surname = null,
         ?DateTime $birthDate = null,
         ?Gender $gender = null,
@@ -83,7 +85,8 @@ class Person{
      * Get the age of the person
      * @return int
      */
-    public function getAge(): int {
+    public function getAge(): int|null {
+        if(!$this->birthDate) return null;
         $now = new DateTime();
         $diff = $now->diff($this->birthDate);
         return $diff->y;
@@ -154,5 +157,22 @@ class Person{
         $this->height = $height;
     }
 
-
+    public function __toString(): string {
+        $name = $this->name ?? 'N/A';
+        $surname = $this->surname ?? 'N/A';
+        $age = $this->birthDate ? $this->getAge() : 'N/A';
+        $birthDate = $this->birthDate ? $this->birthDate->format('Y-m-d') : 'N/A';
+        $height = $this->height ?? 'N/A';
+        $gender = $this->gender ? $this->gender->value : 'N/A';
+    
+        return "<pre>
+            Name: $name
+            Surname: $surname
+            Age: $age
+            Birth Date: $birthDate
+            Height: $height
+            Gender: $gender
+        </pre>";
+    }
+    
 }

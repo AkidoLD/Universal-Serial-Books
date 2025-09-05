@@ -1,4 +1,6 @@
 <?php
+
+namespace Enums;
 /**
  * Authorized genre representation
  * 

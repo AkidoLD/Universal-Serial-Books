@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__."/Person.php";
 
+use Enums\Gender;
+
 class User extends Person {
     private string $id;
     private ?string $pseudo;
@@ -85,5 +87,18 @@ class User extends Person {
      */
     public function setPassword(string $password): void {
         $this->password = $password;
+    }
+
+    public function __toString(): string{
+        $id = $this->id;
+        $pseudo = $this->pseudo ?? 'N/A';
+        $email = $this->email;
+        $password = $this->password;
+        return parent::__toString()."<pre>
+            Identifiant: $id
+            Pseudo: $pseudo
+            Email: $email
+            Password: $password
+        </pre>";
     }
 }
