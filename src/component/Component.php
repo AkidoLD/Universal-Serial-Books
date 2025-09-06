@@ -115,6 +115,7 @@
         public function getName(): string{
             return $this->name;
         }
+        
         /**
          * Function used to make visible the current component
          * @return void
