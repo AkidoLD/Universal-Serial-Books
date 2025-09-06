@@ -51,6 +51,9 @@
             array_push($this->classes, $addedClasses);
         }
 
+        public function getClasses(){
+            return $this->classes;
+        }
         /**
          * Function used to add a block to the BEM of current component
          * @param string $newBlockName
