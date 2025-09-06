@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../src/component/Component.php';
+    require_once __DIR__.'/../src/components/Component.php';
     class ComponentTest extends Component{
         public function __construct() {
             parent::__construct('testBlock');
