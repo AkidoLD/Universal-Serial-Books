@@ -11,8 +11,8 @@
          * Constructor of a button component
          * @param string $textContent
          */
-        public function __construct(string $textContent) {
-            parent::__construct('button', ['button']);
+        public function __construct(string $textContent, string  $blockName = 'button') {
+            parent::__construct($blockName, ['button']);
             $this->text = $textContent;
         }
 
@@ -29,7 +29,10 @@
          */
         public function render(){
             ?>
-            <input type="button" class="<?=implode('',$this->getClasses())?>" value="<?=$this->text?>">
+            <input type="button" 
+                   class="<?=implode('',$this->getClasses())?>" 
+                   value="<?=$this->text?>"
+            >
             <?php 
         }
 
@@ -38,6 +41,13 @@
          * @return void
          */
         public function disable(){
+            ?>
+            <style>
+            <?='.'.$this->blockName?>{
+                background : gray;
+            }
+            </style>
+            <?php            
 
         }
 

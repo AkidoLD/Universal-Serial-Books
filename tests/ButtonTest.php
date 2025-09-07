@@ -5,4 +5,5 @@
     $test->setBColor('green');
     $test->setTColor('white');
     $test->render();
+    $test->disable();
 ?>
