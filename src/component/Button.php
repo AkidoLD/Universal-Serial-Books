@@ -1,5 +1,9 @@
 <?php
     require_once __DIR__.'/../component/Component.php';
+
+    /**
+     * Class used to represent a button
+     */
     class Button extends Component{
         private string $text;
 
@@ -69,6 +73,21 @@
             <style>
             <?='.'.$this->blockName?>{
                 background : <?=$color?>;
+            }
+            </style>
+            <?php
+        }
+
+        /**
+         * Function used to set the cclor of text in button
+         * @param string $color
+         * @return void
+         */
+        public function setTColor(string $color){
+            ?>
+            <style>
+            <?='.'.$this->blockName?>{
+                color : <?=$color?>;
             }
             </style>
             <?php

@@ -3,5 +3,6 @@
     $test = new Button('Button for test');
     $test->round(8);
     $test->setBColor('green');
+    $test->setTColor('white');
     $test->render();
 ?>
