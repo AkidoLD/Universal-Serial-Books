@@ -9,6 +9,10 @@
             <div class=<?=$this->blockName?>>
                 <?=$this->blockName?>
             </div>  
+            <?php
+        }
+        public function show(){
+            ?>
             <style>
                 <?='.'.$this->blockName?>{
                     display : inline;

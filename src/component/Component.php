@@ -120,7 +120,7 @@
         }
         
         /**
-         * Function used to make visible the current component
+         * Function used to make visible the current component by user
          * @return void
          */
         abstract public function render();
@@ -142,4 +142,10 @@
         //  * @return void
         //  */
         abstract public function hide();
+
+        /**
+         * Function used to show the current component if it's currently hided
+         * @return void
+         */
+        abstract public function show();
     }
