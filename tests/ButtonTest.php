@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../src/component/Button.php';
+    require_once __DIR__.'/../src/view/component/Button.php';
     /**
      * ********** Test step **********
      */
