@@ -1,7 +1,9 @@
 <?php
-require_once __DIR__."/Person.php";
 
-use Enums\Gender;
+namespace App\Model;
+
+use App\Enums\Gender;
+use App\model\Person;
 
 class User extends Person {
     private string $id;
@@ -18,7 +20,7 @@ class User extends Person {
      * @param string|null $pseudo Optional username
      * @param string $email User's email
      * @param string $password Already hashed password
-     * @param DateTime|null $birthDate User's birth date
+     * @param \DateTime|null $birthDate User's birth date
      * @param Gender|null $gender User's gender
      * @param int|null $height User's height
      */
@@ -29,7 +31,7 @@ class User extends Person {
         ?string $pseudo = null,
         string $email,
         string $password,
-        ?DateTime $birthDate = null,
+        ?\DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null
     ){

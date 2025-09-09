@@ -1,5 +1,5 @@
 <?php
-namespace Enums;
+namespace App\Enums;
 
 /**
  * Enum representing the main genres of books in a library.

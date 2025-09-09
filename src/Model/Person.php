@@ -1,21 +1,22 @@
 <?php
-require_once __DIR__."/../Enums/Gender.php";
 
-use Enums\Gender;
+namespace App\Model;
+
+use App\Enums\Gender;
 /**
  * The basic representation of a person
  */
 class Person{
     private string $name;
     private ?string $surname;
-    private ?DateTime $birthDate;
+    private ?\DateTime $birthDate;
     private ?Gender $gender;
     private ?int $height;
 
     public function __construct(
         string $name = 'default',
         ?string $surname = null,
-        ?DateTime $birthDate = null,
+        ?\DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null,
     ){   
@@ -55,7 +56,7 @@ class Person{
      * 
      * @return string|null
      */
-    public function getBirthDate(): DateTime|null{
+    public function getBirthDate(): \DateTime|null{
         return $this->birthDate;
     }
     
@@ -87,7 +88,7 @@ class Person{
      */
     public function getAge(): int|null {
         if(!$this->birthDate) return null;
-        $now = new DateTime();
+        $now = new \DateTime();
         $diff = $now->diff($this->birthDate);
         return $diff->y;
     }
@@ -123,11 +124,11 @@ class Person{
      * 
      * This method makes it possible to modify the birth date of the instantiated object
      * 
-     * @param DateTime $birthDate
+     * @param \DateTime $birthDate
      * 
      * @return void
      */
-    public function setBirthDate(?DateTime $birthDate){
+    public function setBirthDate(?\DateTime $birthDate){
         $this->birthDate = $birthDate;
     }
 

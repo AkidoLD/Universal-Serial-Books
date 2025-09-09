@@ -1,15 +1,17 @@
 <?php
 
-// require_once __DIR__."/../tests/PersonTest.php";
-// require_once __DIR__."/../tests/BookTest.php";
-// require_once __DIR__."/../tests/UserTest.php";
+require_once __DIR__."/../vendor/autoload.php";
 
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__."/../tests/BookTest.php";
+require_once __DIR__."/../tests/PersonTest.php";
+require_once __DIR__."/../tests/ComponentTest.php";
 
-use Ramsey\Uuid\Uuid;
+// $inc = require __DIR__ . '/../vendor/autoload.php';
+// echo '<pre>';
+// var_dump($inc);
+// echo '</pre>';
 
-$uuid = Uuid::uuid4()->toString();
-$uuid2 = Uuid::uuid4()->toString();
 
-echo "Mon UUID : " . $uuid;
-echo "Mon UUID2: ".$uuid2;
+
+// use Ramsey\Uuid\Uuid;
+

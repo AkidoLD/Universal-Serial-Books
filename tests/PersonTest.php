@@ -1,8 +1,6 @@
 <?php
-require_once __DIR__."/../src/model/Person.php";
-require_once __DIR__."/../src/Enums/Gender.php";
 
-use Enums\Gender;
+use App\model\Person;
 
 $birthDate = new DateTime("2000-05-15");
 $person = new Person(

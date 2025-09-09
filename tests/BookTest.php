@@ -1,8 +1,8 @@
 <?php
 
-use Enums\BookGender;
-
-require_once __DIR__."/../src/model/Book.php";
+use App\Enums\BookGender;
+use App\Model\Person;
+use App\Model\Book;
 
 $title = 'Une nuit noir';
 $author = new Person();
