@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USB-Universal_Serial_Books</title>
-</head>
-<body>
-    <h1><?="Welcome to empty USB"?></h1>
-</body>
-</html>
+<?php
+
+require_once __DIR__."/../vendor/autoload.php";
+
+require_once __DIR__."/../tests/BookTest.php";
+require_once __DIR__."/../tests/PersonTest.php";
+require_once __DIR__."/../tests/ComponentTest.php";
+
+// $inc = require __DIR__ . '/../vendor/autoload.php';
+// echo '<pre>';
+// var_dump($inc);
+// echo '</pre>';
+
+
+
+// use Ramsey\Uuid\Uuid;
+
