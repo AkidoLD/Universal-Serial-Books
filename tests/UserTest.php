@@ -1,8 +1,6 @@
 <?php
 
-use Enums\Gender;
-
-require_once __DIR__."/../src/model/User.php";
+use App\model\User;
 
 $date = new DateTime();
 

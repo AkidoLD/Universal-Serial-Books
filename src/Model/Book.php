@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . "/Person.php";
-require_once __DIR__ . "/../Enums/BookGender.php";
+namespace App\model;
 
-use Enums\BookGender;
+use App\Enums\BookGender;
+
 /**
  * Class Book
  *
@@ -13,7 +13,7 @@ class Book {
     private string $title;
     private Person $author;
     private ?string $cover;
-    private ?DateTime $publicationDate;
+    private ?\DateTime $publicationDate;
     private ?string $isbn;
     private ?int $pages;
     private ?BookGender $genre;
@@ -23,7 +23,7 @@ class Book {
      *
      * @param string $title The title of the book
      * @param Person $author The author of the book
-     * @param DateTime|null $publicationDate The publication date (optional)
+     * @param \DateTime|null $publicationDate The publication date (optional)
      * @param string|null $isbn The ISBN code (optional)
      * @param int|null $pages Number of pages (optional)
      * @param BookGender|null $genre The genre of the book (optional)
@@ -32,7 +32,7 @@ class Book {
     public function __construct(
         string $title,
         Person $author,
-        ?DateTime $publicationDate = null,
+        ?\DateTime $publicationDate = null,
         ?string $isbn = null,
         ?int $pages = null,
         ?BookGender $genre = null,
@@ -56,7 +56,7 @@ class Book {
         return $this->author;
     }
 
-    public function getPublicationDate(): ?DateTime {
+    public function getPublicationDate(): ?\DateTime {
         return $this->publicationDate;
     }
 
@@ -82,7 +82,7 @@ class Book {
         $this->author = $author;
     }
 
-    public function setPublicationDate(?DateTime $publicationDate): void {
+    public function setPublicationDate(?\DateTime $publicationDate): void {
         $this->publicationDate = $publicationDate;
     }
 
