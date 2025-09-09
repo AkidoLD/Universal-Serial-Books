@@ -8,40 +8,40 @@ use App\Enums\BookGender;
  * Class Book
  *
  * Represents a book with all its main attributes.
- */
+*/
 class Book {
+    private ?string $isbn;
     private string $title;
     private Person $author;
     private ?string $cover;
     private ?\DateTime $publicationDate;
-    private ?string $isbn;
     private ?int $pages;
     private ?BookGender $genre;
 
     /**
      * Book constructor.
      *
+     * @param string|null $isbn The ISBN code (optional)
      * @param string $title The title of the book
      * @param Person $author The author of the book
      * @param \DateTime|null $publicationDate The publication date (optional)
-     * @param string|null $isbn The ISBN code (optional)
      * @param int|null $pages Number of pages (optional)
      * @param BookGender|null $genre The genre of the book (optional)
      * @param ?string $cover The cover of the book 
      */
     public function __construct(
+        ?string $isbn = null,
         string $title,
         Person $author,
         ?\DateTime $publicationDate = null,
-        ?string $isbn = null,
         ?int $pages = null,
         ?BookGender $genre = null,
         ?string $cover = null,
     ) {
+        $this->isbn = $isbn;
         $this->title = $title;
         $this->author = $author;
         $this->publicationDate = $publicationDate;
-        $this->isbn = $isbn;
         $this->pages = $pages;
         $this->genre = $genre;
     }
