@@ -1,0 +1,202 @@
+[
+    {
+        "id": "1373e757-d9fa-44fb-a845-c0b92b06fb2d",
+        "title": "La chambre des secrets",
+        "author": "J.K. Rowling",
+        "publicationDate": "1998-07-02",
+        "isbn": "7ce43151-de91-426f-9780-cf6d7dde4c26",
+        "pages": 341,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "bee1096d-81c8-48db-8c20-82dd19603ed5",
+        "title": "Le myst\u00e8re de l'\u00eele",
+        "author": "Jules Verne",
+        "publicationDate": "1874-03-20",
+        "isbn": "35215d81-1e3c-4425-b056-b2286ea58944",
+        "pages": 412,
+        "genre": "Aventure",
+        "cover": null
+    },
+    {
+        "id": "e3c4710b-b3b1-4d67-aad6-c27fabfb390e",
+        "title": "L'\u00e9trange voyage",
+        "author": "H.G. Wells",
+        "publicationDate": "1895-05-14",
+        "isbn": "30eb38e7-8cd0-4e79-87a6-d2ecb1e0aff0",
+        "pages": 298,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "afc004b8-3c05-4f29-9498-540a9ce0d362",
+        "title": "Les ombres du pass\u00e9",
+        "author": "Agatha Christie",
+        "publicationDate": "1934-09-01",
+        "isbn": "b6228bf5-1e07-4f5a-9369-bfe9e897ec49",
+        "pages": 256,
+        "genre": "Mystery",
+        "cover": null
+    },
+    {
+        "id": "1bb6c619-76c4-4dd0-91d1-4a1f07c1d11b",
+        "title": "La nuit des \u00e9toiles",
+        "author": "Stephen Hawking",
+        "publicationDate": "1988-04-01",
+        "isbn": "7a8c9c98-de75-489e-bc4e-33064350dfe8",
+        "pages": 224,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "f3d97653-82db-4496-8076-8a2af36fdf3a",
+        "title": "Le tr\u00e9sor oubli\u00e9",
+        "author": "Robert Louis Stevenson",
+        "publicationDate": "1883-11-14",
+        "isbn": "03fff755-15a5-4bcf-97f3-0a4d678548a5",
+        "pages": 289,
+        "genre": "Aventure",
+        "cover": null
+    },
+    {
+        "id": "80cdc6c7-1f27-43da-8b51-83caf809ce32",
+        "title": "La l\u00e9gende du vent",
+        "author": "Patrick Rothfuss",
+        "publicationDate": "2007-03-27",
+        "isbn": "74537fb6-694d-4bc3-a5e8-f3919c8941e0",
+        "pages": 662,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "794dea19-b49d-4057-b3b2-4125df89a0ed",
+        "title": "Les portes du temps",
+        "author": "Isaac Asimov",
+        "publicationDate": "1950-07-01",
+        "isbn": "134570bf-5739-4c79-8eae-525f4e2e429a",
+        "pages": 310,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "b2f47f60-0038-435e-9ad5-4a095e8fd9b1",
+        "title": "Le souffle du dragon",
+        "author": "Anne McCaffrey",
+        "publicationDate": "1968-05-15",
+        "isbn": "7a781f1d-7764-4cbf-b995-4422f05ee0c4",
+        "pages": 345,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "0197186d-c6e2-4120-95ac-dea03482137e",
+        "title": "L'appel de l'aventure",
+        "author": "Jack London",
+        "publicationDate": "1903-01-01",
+        "isbn": "e59b9b72-b14b-4e2c-ad57-bfb5d7e6a5e2",
+        "pages": 401,
+        "genre": "Aventure",
+        "cover": null
+    },
+    {
+        "id": "cc7fe684-0914-4a4f-a9d7-dfcc06787e07",
+        "title": "La chambre des secrets",
+        "author": "J.K. Rowling",
+        "publicationDate": "1998-07-02",
+        "isbn": "5d219174-e20a-4afd-ae34-726559507beb",
+        "pages": 341,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "006df7a8-cd69-49ca-a548-4f5e6d6ec07b",
+        "title": "Le myst\u00e8re de l'\u00eele",
+        "author": "Jules Verne",
+        "publicationDate": "1874-03-20",
+        "isbn": "613b3393-17c0-49ee-994e-8c896df15ef9",
+        "pages": 412,
+        "genre": "Aventure",
+        "cover": null
+    },
+    {
+        "id": "611bd925-e98f-4dae-b932-303a9bd5a355",
+        "title": "L'\u00e9trange voyage",
+        "author": "H.G. Wells",
+        "publicationDate": "1895-05-14",
+        "isbn": "782b83ef-f889-4523-88f0-2d79a5e990c2",
+        "pages": 298,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "e5747406-0144-4d89-9cd5-f2713a5dc203",
+        "title": "Les ombres du pass\u00e9",
+        "author": "Agatha Christie",
+        "publicationDate": "1934-09-01",
+        "isbn": "ccf3c053-3b5b-4adb-8f0d-b418b36c40f5",
+        "pages": 256,
+        "genre": "Mystery",
+        "cover": null
+    },
+    {
+        "id": "2dd35ab3-22ff-4c1f-970a-52f1ac544c10",
+        "title": "La nuit des \u00e9toiles",
+        "author": "Stephen Hawking",
+        "publicationDate": "1988-04-01",
+        "isbn": "3f8e05fc-0a44-47f7-ac58-aa79f5f4d9a3",
+        "pages": 224,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "63bcae31-5ed8-4c8e-ab11-f441a4e8cbd7",
+        "title": "Le tr\u00e9sor oubli\u00e9",
+        "author": "Robert Louis Stevenson",
+        "publicationDate": "1883-11-14",
+        "isbn": "3b58b459-f4c4-431a-bef6-2c8d16733308",
+        "pages": 289,
+        "genre": "Aventure",
+        "cover": null
+    },
+    {
+        "id": "9635c248-e846-4fed-bc11-b1b053309487",
+        "title": "La l\u00e9gende du vent",
+        "author": "Patrick Rothfuss",
+        "publicationDate": "2007-03-27",
+        "isbn": "54b8d4b9-c19b-43e1-9c23-8bd9d731befd",
+        "pages": 662,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "3789a960-fef6-4202-9b1a-e8987006663c",
+        "title": "Les portes du temps",
+        "author": "Isaac Asimov",
+        "publicationDate": "1950-07-01",
+        "isbn": "c0959a4d-7fb1-4059-bf63-042541bed2cc",
+        "pages": 310,
+        "genre": "Science Fiction",
+        "cover": null
+    },
+    {
+        "id": "c1b5eac7-ba4c-433d-9cb2-354edafde7d3",
+        "title": "Le souffle du dragon",
+        "author": "Anne McCaffrey",
+        "publicationDate": "1968-05-15",
+        "isbn": "4c45ca47-77f8-4588-831b-90012d59bcb5",
+        "pages": 345,
+        "genre": "Fantasy",
+        "cover": null
+    },
+    {
+        "id": "8b05f373-5720-4139-8915-93cf6741616f",
+        "title": "L'appel de l'aventure",
+        "author": "Jack London",
+        "publicationDate": "1903-01-01",
+        "isbn": "84a04ffd-6958-4374-aca3-9405974e58e9",
+        "pages": 401,
+        "genre": "Aventure",
+        "cover": null
+    }
+]
