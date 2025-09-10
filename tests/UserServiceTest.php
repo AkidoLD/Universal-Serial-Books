@@ -11,17 +11,8 @@ $repository = new UserJsonRepository($filePath);
 
 $service = new UserService($repository);
 
-$user = new User(
-    'Steffan',
-    '123@gmail.com',
-    '245',
-);
 
-var_dump($service->getAllUsers());
-
-// $service->addUser($user);
-
-var_dump($users = $service->getAllUsers());
+$users = $service->getAllUsers();
 
 foreach($users as $user){
     echo $user;
