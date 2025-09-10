@@ -1,19 +1,18 @@
 <?php
 
-use App\model\User;
+use App\Model\User;
 
 $date = new DateTime();
 
 $user = new User(
-    '1',
-    'Wouagang',
-    'Rayan',
-    null,
-    'alexrayan14231423@gmail.com',
-    '0001',
-    $date,
-    null,
-    null
+    name: 'Wouagang',
+    surname: 'Rayan',
+    pseudo: null,
+    email: 'alexrayan14231423@gmail.com',
+    password: '0001',
+    birthDate: $date,
+    gender: null,
+    height: null
 );
 
 echo $user;
