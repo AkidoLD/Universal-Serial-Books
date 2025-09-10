@@ -16,9 +16,9 @@ interface BookRepositoryInterface {
     /**
      * Retrieve all books from the repository.
      *
-     * @return \Traversable<Book> A collection of Book objects
+     * @return ?\Traversable<Book> A collection of Book objects
      */
-    public function getAll(): \Traversable;
+    public function getAll(): ?\Traversable;
 
     /**
      * Delete a book from the repository.
@@ -65,7 +65,7 @@ interface BookRepositoryInterface {
      * @param string $title The title of the book
      * @return \Traversable<Book> A collection of matching books
      */
-    public function findByTitle(string $title): \Traversable;
+    public function findByTitle(string $title): ?\Traversable;
 
     /**
      * Check if a book exists by its ISBN.

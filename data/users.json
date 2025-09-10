@@ -1,0 +1,32 @@
+[
+    {
+        "id": "6b616aef-583b-453f-b771-d58354f7ad40",
+        "name": "Akido",
+        "surname": null,
+        "pseudo": null,
+        "email": "alex@gmail.com",
+        "birthDate": null,
+        "gender": null,
+        "height": null
+    },
+    {
+        "id": "eab272c2-1cf0-467c-96a9-05b40c459ad5",
+        "name": "Rayan",
+        "surname": null,
+        "pseudo": null,
+        "email": "Rayan@gmail.com",
+        "birthDate": null,
+        "gender": null,
+        "height": null
+    },
+    {
+        "id": "b726ba20-cfdd-48af-9b06-ea78ff34efb6",
+        "name": "Steffan",
+        "surname": null,
+        "pseudo": null,
+        "email": "123@gmail.com",
+        "birthDate": null,
+        "gender": null,
+        "height": null
+    }
+]

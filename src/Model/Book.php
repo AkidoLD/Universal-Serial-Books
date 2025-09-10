@@ -21,6 +21,16 @@ class Book {
     private ?int $pages;
     private ?BookGender $genre;
 
+    // JSON keys
+    public const KEY_ID = 'id';
+    public const KEY_TITLE = 'title';
+    public const KEY_AUTHOR = 'author';
+    public const KEY_PUBLICATION_DATE = 'publicationDate';
+    public const KEY_ISBN = 'isbn';
+    public const KEY_PAGES = 'pages';
+    public const KEY_GENRE = 'genre';
+    public const KEY_COVER = 'cover';
+
     /**
      * Book constructor.
      *
@@ -90,14 +100,14 @@ class Book {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'author' => $this->author?->getName(),
-            'publicationDate' => $this->publicationDate?->format('Y-m-d'),
-            'isbn' => $this->isbn,
-            'pages' => $this->pages,
-            'genre' => $this->genre?->value,
-            'cover' => $this->cover,
+            self::KEY_ID => $this->id,
+            self::KEY_TITLE => $this->title,
+            self::KEY_AUTHOR => $this->author?->getName(),
+            self::KEY_PUBLICATION_DATE => $this->publicationDate?->format('Y-m-d'),
+            self::KEY_ISBN => $this->isbn,
+            self::KEY_PAGES => $this->pages,
+            self::KEY_GENRE => $this->genre?->value,
+            self::KEY_COVER => $this->cover,
         ];
     }
 

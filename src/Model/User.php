@@ -18,6 +18,12 @@ class User extends Person {
     private string $email;
     private string $password; // Already hashed password
 
+    // ===== JSON KEYS =====
+    public const KEY_ID = 'id';
+    public const KEY_PSEUDO = 'pseudo';
+    public const KEY_EMAIL = 'email';
+    public const KEY_PASSWORD = 'password';
+
     /**
      * User constructor.
      *
@@ -27,28 +33,29 @@ class User extends Person {
      * @param string|null $pseudo Optional username
      * @param string $email User's email
      * @param string $password Already hashed password
+     * @param string $id User's ID
      * @param \DateTime|null $birthDate User's birth date
      * @param Gender|null $gender User's gender
      * @param int|null $height User's height
      */
     public function __construct(
-        ?string $id = null,
         string $name,
-        ?string $surname = null,
-        ?string $pseudo = null,
         string $email,
         string $password,
+        ?string $id = null,
+        ?string $surname = null,
+        ?string $pseudo = null,
         ?\DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null
-    ) {
+    ){
         parent::__construct($name, $surname, $birthDate, $gender, $height);
-        $this->id = $id ?? Uuid::uuid4()->toString(); // Generate UUID v4 if null
+        $this->id = $id ?? Uuid::uuid4()->toString(); // generate UUID internally
         $this->pseudo = $pseudo;
         $this->email = $email;
         $this->password = $password;
     }
-
+    
     // ===== GETTERS =====
     public function getId(): string { return $this->id; }
     public function getPseudo(): ?string { return $this->pseudo; }

@@ -16,6 +16,13 @@ class Person {
     private ?Gender $gender;
     private ?int $height;
 
+    // ===== JSON KEYS =====
+    public const KEY_NAME = 'name';
+    public const KEY_SURNAME = 'surname';
+    public const KEY_BIRTHDATE = 'birthDate';
+    public const KEY_GENDER = 'gender';
+    public const KEY_HEIGHT = 'height';
+
     /**
      * Person constructor.
      *

@@ -59,9 +59,6 @@ class UserService {
      * @throws ValidationException If the user data is invalid or email already exists
      */
     public function addUser(User $user): void {
-        // Generate a new UUID for the user
-        $user->setId(Uuid::uuid4()->toString());
-
         // Validate user data
         $this->validateUser($user, isNew: true);
 
