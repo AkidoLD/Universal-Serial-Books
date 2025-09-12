@@ -2,6 +2,7 @@
     /**
      * Class used to represent a component which can be see by the user
      */
+    namespace Component;
     abstract class Component{
 
         protected string $name;
@@ -10,8 +11,6 @@
         protected string $blockName;  
         protected array $elements;
         protected array $modifiers;
-        protected bool $visible;
-        protected bool $workable;
         protected array $children;
 
         public function __construct(string $blockName, array $class = ['component']) {
@@ -124,28 +123,4 @@
          * @return void
          */
         abstract public function render();
-
-        /**
-         * Function used to make the current component not workable
-         * @return void
-         */
-        abstract public function disable();
-
-        /**
-         * Function used to make the current component workable
-         * @return void
-         */
-        abstract public function enable();
-
-        // /**
-        //  * Function used to hide the current component
-        //  * @return void
-        //  */
-        abstract public function hide();
-
-        /**
-         * Function used to show the current component if it's currently hided
-         * @return void
-         */
-        abstract public function show();
     }

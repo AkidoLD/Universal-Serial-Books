@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__.'/../component/Component.php';
-
+    namespace Button;
+    use App\Component;
     /**
      * Class used to represent a button
      */
