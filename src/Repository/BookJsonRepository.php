@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Model\Book;
-use App\Model\Person;
-use App\Enums\BookGender;
+use App\Exceptions\RepositoryException;
+use App\Interfaces\BookRepositoryInterface;
 
 /**
  * JSON-based implementation of the BookRepositoryInterface.
@@ -13,12 +13,7 @@ use App\Enums\BookGender;
  * All keys are based on the constants defined in the Book class,
  * ensuring maintainability and avoiding hardcoded strings.
  */
-class BookJsonRepository implements BookRepositoryInterface {
-
-    /**
-     * @var string Path to the JSON file storing books
-     */
-    private string $filePath;
+class BookJsonRepository extends JsonRepository implements BookRepositoryInterface {
 
     /**
      * Constructor
@@ -26,33 +21,7 @@ class BookJsonRepository implements BookRepositoryInterface {
      * @param string $filePath Path to the JSON file
      */
     public function __construct(string $filePath) {
-        $this->filePath = $filePath;
-
-        // Create file if it does not exist
-        if (!file_exists($filePath)) {
-            file_put_contents($filePath, json_encode([]));
-        }
-    }
-
-    /**
-     * Load all books from the JSON file
-     *
-     * @return array<int, array> Raw associative array of books
-     */
-    private function loadData(): array {
-        $json = file_get_contents($this->filePath);
-        $data = json_decode($json, true);
-        return is_array($data) ? $data : [];
-    }
-
-    /**
-     * Save the raw array of books to JSON file
-     *
-     * @param array<int, array> $data
-     * @return void
-     */
-    private function saveData(array $data): void {
-        file_put_contents($this->filePath, json_encode($data, JSON_PRETTY_PRINT));
+        parent::__construct($filePath);
     }
 
     /**
@@ -62,42 +31,20 @@ class BookJsonRepository implements BookRepositoryInterface {
         $data = $this->loadData();
 
         foreach ($data as $item) {
-            yield $this->createBookFromArray($item);
+            yield Book::fromArray($item);
         }
-    }
-
-    /**
-     * Create a Book object from a raw associative array
-     *
-     * @param array $item
-     * @return Book
-     */
-    private function createBookFromArray(array $item): Book {
-        return new Book(
-            $item[Book::KEY_ID] ?? null,
-            $item[Book::KEY_TITLE] ?? '',
-            isset($item[Book::KEY_AUTHOR]) ? new Person($item[Book::KEY_AUTHOR]) : null,
-            isset($item[Book::KEY_PUBLICATION_DATE]) ? new \DateTime($item[Book::KEY_PUBLICATION_DATE]) : null,
-            $item[Book::KEY_ISBN] ?? null,
-            $item[Book::KEY_PAGES] ?? null,
-            isset($item[Book::KEY_GENRE]) ? BookGender::from($item[Book::KEY_GENRE]) : null,
-            $item[Book::KEY_COVER] ?? null
-        );
     }
 
     /**
      * {@inheritdoc}
      */
     public function add(Book $book): bool {
-        $data = $this->loadData();
-
         // Prevent duplicate by ID
-        foreach ($data as $item) {
-            if ($item[Book::KEY_ID] === $book->getId()) {
-                return false;
-            }
+        if($this->existById($book)){
+            throw new RepositoryException('The book id already exist in the database');
         }
-
+        
+        $data = $this->loadData();
         $data[] = $book->toArray();
         $this->saveData($data);
         return true;
@@ -146,7 +93,16 @@ class BookJsonRepository implements BookRepositoryInterface {
     public function findByIsbn(string $isbn): ?Book {
         foreach ($this->loadData() as $item) {
             if (($item[Book::KEY_ISBN] ?? null) === $isbn) {
-                return $this->createBookFromArray($item);
+                return Book::fromArray($item);
+            }
+        }
+        return null;
+    }
+
+    public function findById(string $id): ?Book{
+        foreach ($this->loadData() as $item) {
+            if (($item[Book::KEY_ID] ?? null) === $id) {
+                return Book::fromArray($item);
             }
         }
         return null;
@@ -159,7 +115,7 @@ class BookJsonRepository implements BookRepositoryInterface {
         $matches = [];
         foreach ($this->loadData() as $item) {
             if (stripos($item[Book::KEY_TITLE] ?? '', $title) !== false) {
-                $matches[] = $this->createBookFromArray($item);
+                $matches[] = Book::fromArray($item);
             }
         }
         return $matches ? new \ArrayIterator($matches) : null;
@@ -170,5 +126,18 @@ class BookJsonRepository implements BookRepositoryInterface {
      */
     public function existByIsbn(string $isbn): bool {
         return $this->findByIsbn($isbn) !== null;
+    }
+
+    public function existById(string $id): bool{
+        return $this->findById($id) !== null;
+    }
+
+    public function refreshData(){
+        $books = $this->getAll();
+        $data = [];
+        foreach($books as $book){
+            $data[] = $book->toArray();
+        }
+        $this->saveData($data);
     }
 }

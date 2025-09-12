@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Repository\BookRepositoryInterface;
+use App\Interfaces\BookRepositoryInterface;
 use App\Model\Book;
 use App\Exceptions\ValidationException;
-use Ramsey\Uuid\Uuid;
 
 class BookService {
     private BookRepositoryInterface $repository;
@@ -49,9 +48,6 @@ class BookService {
      * @throws ValidationException If the book data is invalid or ISBN/title already exists
      */
     public function addBook(Book $book): void {
-        // Generate a new UUID for the book
-        $book->setIsbn(Uuid::uuid4()->toString());
-
         // Validate book data
         $this->validateBook($book, isNew: true);
 
@@ -93,7 +89,7 @@ class BookService {
      * @throws ValidationException If the book does not exist
      */
     public function deleteBookById(string $bookId): void {
-        if (!$this->repository->existByIsbn($bookId)) {
+        if (!$this->repository->existById($bookId)) {
             throw new ValidationException("Book not found: cannot delete");
         }
         $this->repository->delete($bookId);

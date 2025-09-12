@@ -3,13 +3,15 @@
 namespace App\Model;
 
 use App\Enums\Gender;
+use App\Interfaces\ArrayConvertible;
+use DateTime;
 
 /**
  * Class Person
  *
  * Represents a basic person with name, surname, birth date, gender, and height.
  */
-class Person {
+class Person implements ArrayConvertible{
     private string $name;
     private ?string $surname;
     private ?\DateTime $birthDate;
@@ -23,6 +25,9 @@ class Person {
     public const KEY_GENDER = 'gender';
     public const KEY_HEIGHT = 'height';
 
+    //Constantes
+    public const DEFAULT_NAME = "No name";
+
     /**
      * Person constructor.
      *
@@ -33,14 +38,14 @@ class Person {
      * @param int|null $height Height in cm
      */
     public function __construct(
-        string $name = 'default',
+        string $name = self::DEFAULT_NAME,
         ?string $surname = null,
         ?\DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null
     ) {
-        $this->name = $name;
-        $this->surname = $surname;
+        $this->name = trim($name);
+        $this->surname = trim($surname);
         $this->birthDate = $birthDate;
         $this->gender = $gender;
         $this->height = $height;
@@ -65,13 +70,44 @@ class Person {
     }
 
     // ===== SETTERS =====
-    public function setName(string $name): void { $this->name = $name; }
-    public function setSurname(?string $surname): void { $this->surname = $surname; }
+    public function setName(string $name): void { $this->name = trim($name); }
+    public function setSurname(?string $surname): void { $this->surname = trim($surname); }
     public function setBirthDate(?\DateTime $birthDate): void { $this->birthDate = $birthDate; }
     public function setGender(?Gender $gender): void { $this->gender = $gender; }
     public function setHeight(?int $height): void { $this->height = $height; }
 
     // ===== UTILITY =====
+
+    /**
+     * Convert the `Person` instance to an `Array`
+     * 
+     * @return array<int|string|null>
+     */
+    public function toArray(): array{
+        return [
+            self::KEY_NAME => $this->name,
+            self::KEY_SURNAME => $this->surname,
+            self::KEY_BIRTHDATE => $this->birthDate->getTimestamp(),
+            self::KEY_GENDER => $this->gender->value,
+            self::KEY_HEIGHT => $this->height,
+        ];
+    }
+
+    /**
+     * Convert an `Array` to an `Person` instance
+     * @param array $array
+     * @return Person
+     */
+    public static function fromArray(array $array): Person{
+        return new Person(
+            $array[self::KEY_NAME] ?? null,
+            $array[self::KEY_SURNAME] ?? null,
+            $array[self::KEY_BIRTHDATE] ? new DateTime()->setTimestamp($array[self::KEY_BIRTHDATE]) : null,
+            $array[self::KEY_GENDER] ? Gender::from($array[self::KEY_GENDER]) : null,
+            $array[self::KEY_HEIGHT] ?? null,
+        );
+    }
+
     public function __toString(): string {
         $name = $this->name;
         $surname = $this->surname ?? 'N/A';
@@ -80,13 +116,13 @@ class Person {
         $height = $this->height ?? 'N/A';
         $gender = $this->gender ? $this->gender->value : 'N/A';
 
-        return "<pre>
+        return "
             Name: $name
             Surname: $surname
             Age: $age
             Birth Date: $birthDate
             Height: $height
             Gender: $gender
-        </pre>";
+        ";
     }
 }

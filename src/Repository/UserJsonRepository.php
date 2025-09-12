@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Exceptions\RepositoryException;
 use App\Model\User;
-use App\Model\Person;
-use App\Enums\Gender;
+use App\Interfaces\UserRepositoryInterface;
 
 /**
  * JSON-based implementation of the UserRepositoryInterface.
@@ -13,65 +13,14 @@ use App\Enums\Gender;
  * All keys are based on constants defined in the User class, ensuring
  * maintainability and avoiding hardcoded strings.
  */
-class UserJsonRepository implements UserRepositoryInterface {
-
-    /**
-     * @var string Path to the JSON file storing users
-     */
-    private string $filePath;
-
+class UserJsonRepository extends JsonRepository implements UserRepositoryInterface {
     /**
      * Constructor
      *
      * @param string $filePath Path to the JSON file
      */
     public function __construct(string $filePath) {
-        $this->filePath = $filePath;
-
-        if (!file_exists($filePath)) {
-            file_put_contents($filePath, json_encode([]));
-        }
-    }
-
-    /**
-     * Load all users from JSON file
-     *
-     * @return array<int, array> Raw associative array
-     */
-    private function loadData(): array {
-        $json = file_get_contents($this->filePath);
-        $data = json_decode($json, true);
-        return is_array($data) ? $data : [];
-    }
-
-    /**
-     * Save raw array of users to JSON
-     *
-     * @param array<int, array> $data
-     * @return void
-     */
-    private function saveData(array $data): void {
-        file_put_contents($this->filePath, json_encode($data, JSON_PRETTY_PRINT));
-    }
-
-    /**
-     * Convert an associative array to a User object
-     *
-     * @param array $item
-     * @return User
-     */
-    private function createUserFromArray(array $item): User {
-        return new User(
-            $item[Person::KEY_NAME] ?? '',
-            $item[User::KEY_EMAIL] ?? '',
-            $item[User::KEY_PASSWORD] ?? '',
-            $item[User::KEY_ID] ?? null,
-            $item[Person::KEY_SURNAME] ?? null,
-            $item[User::KEY_PSEUDO] ?? null,
-            isset($item[Person::KEY_BIRTHDATE]) ? new \DateTime($item[Person::KEY_BIRTHDATE]) : null,
-            isset($item[Person::KEY_GENDER]) ? Gender::from($item[Person::KEY_GENDER]) : null,
-            $item[Person::KEY_HEIGHT] ?? null
-        );
+        parent::__construct($filePath);
     }
 
     /**
@@ -80,7 +29,7 @@ class UserJsonRepository implements UserRepositoryInterface {
     public function getAll(): \Traversable {
         $data = $this->loadData();
         foreach ($data as $item) {
-            yield $this->createUserFromArray($item);
+            yield User::fromArray($item);
         }
     }
 
@@ -88,12 +37,12 @@ class UserJsonRepository implements UserRepositoryInterface {
      * {@inheritdoc}
      */
     public function add(User $user): bool {
-        $data = $this->loadData();
-
-        foreach ($data as $item) {
-            if ($item[User::KEY_ID] === $user->getId()) return false;
+        //Check if the user id already exist in the repository
+        if($this->existById($user)){
+            throw new RepositoryException('Failed to add new User : The user Id already exist in the repository');
         }
 
+        $data = $this->loadData();
         $data[] = $user->toArray();
         $this->saveData($data);
         return true;
@@ -142,7 +91,7 @@ class UserJsonRepository implements UserRepositoryInterface {
     public function findById(string $id): ?User {
         foreach ($this->loadData() as $item) {
             if (($item[User::KEY_ID] ?? null) === $id) {
-                return $this->createUserFromArray($item);
+                return User::fromArray($item);
             }
         }
         return null;
@@ -154,7 +103,7 @@ class UserJsonRepository implements UserRepositoryInterface {
     public function findByEmail(string $email): ?User {
         foreach ($this->loadData() as $item) {
             if (($item[User::KEY_EMAIL] ?? null) === $email) {
-                return $this->createUserFromArray($item);
+                return User::fromArray($item);
             }
         }
         return null;
@@ -166,7 +115,7 @@ class UserJsonRepository implements UserRepositoryInterface {
     public function findByUsername(string $username): ?User {
         foreach ($this->loadData() as $item) {
             if (($item[User::KEY_PSEUDO] ?? null) === $username) {
-                return $this->createUserFromArray($item);
+                return User::fromArray($item);
             }
         }
         return null;

@@ -13,12 +13,15 @@ $repo = new BookJsonRepository($filePath);
 
 $service = new BookService($repo);
 
-foreach($books as $book){
-    $service->addBook($book);
-}
+// $books = $service->getAllBooks();
 
-$data = $service->getAllBooks();
-
-foreach($data as $book) echo $book;
+// foreach($books as $book){
+//     $service->addBook($book);
+// }
 
 
+$deleteBook = "1bb6c619-76c4-4dd0-91d1-4a1f07c1d11b";
+
+$service->deleteBookById($deleteBook);
+
+foreach($service->getAllBooks() as $book) echo $book;

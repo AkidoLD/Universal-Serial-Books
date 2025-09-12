@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Interfaces;
 
 use App\Model\Book;
 
@@ -74,4 +74,11 @@ interface BookRepositoryInterface {
      * @return bool True if a book with this ISBN exists, false otherwise
      */
     public function existByIsbn(string $isbn): bool;
+
+    /**
+     * Check if a book exists by its Id
+     * @param string $id
+     * @return bool
+     */
+    public function existById(string $id): bool;
 }

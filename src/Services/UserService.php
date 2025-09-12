@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Repository\UserRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Model\User;
 use App\Exceptions\ValidationException;
-use Ramsey\Uuid\Uuid;
 
 class UserService {
     private UserRepositoryInterface $repository;
