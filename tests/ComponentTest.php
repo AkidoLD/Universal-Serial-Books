@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../src/view/component/Component.php';
+    use App\Component;
     class ComponentTest extends Component{
         public function __construct() {
             parent::__construct('testBlock');
