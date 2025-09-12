@@ -1,8 +1,9 @@
 <?php
+    /**
+     * Class used to represent a component which can be see by the user
+     */
+    namespace App\Component;
     abstract class Component{
-        /**
-         * Class reserved to basic component visible on the website
-         */
 
         protected string $name;
         protected string $id;
@@ -10,10 +11,7 @@
         protected string $blockName;  
         protected array $elements;
         protected array $modifiers;
-        protected bool $visible;
-        protected bool $workable;
-        protected array $childs;
-        protected Component $parent;
+        protected array $children;
 
         public function __construct(string $blockName, array $class = ['component']) {
             $this->classes = $class;
@@ -52,6 +50,9 @@
             array_push($this->classes, $addedClasses);
         }
 
+        public function getClasses(){
+            return $this->classes;
+        }
         /**
          * Function used to add a block to the BEM of current component
          * @param string $newBlockName
@@ -67,56 +68,29 @@
          * the modifier array
          * @param string $modifierName
          * @param string $elementLinked
-         * @return bool
+         * @return void
          */
         public function addModifier(string $modifierName, string $elementLinked) {
-            if(in_array($elementLinked, $this->elements) and !in_array($elementLinked.'--'.$modifierName, $this->modifiers)){
-                array_push($this->modifiers, $elementLinked.'--'.$modifierName);
-                return true;
-            } else {
-                return false;
-            }
+            array_push($this->modifiers, $elementLinked.'--'.$modifierName);
         }
 
         /**
          * Function used to add element to block on BEM. It returns a boolean depends of
          * the presence of element in array of elements
          * @param string $elementName
-         * @return bool
-         */
-        public function addElement(string $elementName) : bool{
-            if(!in_array($elementName, $this->elements)){
-                array_push($this->elements, $this->blockName.'__'.$elementName);
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        /**
-         * Function used to add a parent to the current component
-         * @param Component $parent
          * @return void
          */
-        public function setParent(?Component $parent){
-            $this->parent = $parent;
+        public function addElement(string $elementName) {
+            array_push($this->elements, $this->blockName.'__'.$elementName);
         }
 
         /**
-         * Function used to get the parent of the current component
-         * @return Component
-         */
-        public function getParent(): Component{
-            return $this->parent;
-        }
-
-        /**
-         * Function used to set some child to the current component
-         * @param array $childs
+         * Function used to set some children to the current component
+         * @param array $children
          * @return void
          */
-        public function setChilds(array $childs){
-            $this->childs = $childs;
+        public function setChildren(array $children){
+            $this->childs = $children;
         }
 
         /**
@@ -125,15 +99,15 @@
          * @return void
          */
         public function addChild(Component $child){
-            array_push( $this->childs, $child);
+            array_push( $this->children, $child);
         }
 
         /**
-         * Function used to get all the childs of the current component
+         * Function used to get all the children of the current component
          * @return array
          */
-        public function getChild(): array{
-            return $this->childs;
+        public function getChildren(): array{
+            return $this->children;
         }
 
         public function setName(string $newName){
@@ -143,27 +117,10 @@
         public function getName(): string{
             return $this->name;
         }
+        
         /**
-         * Function used to make visible the current component
+         * Function used to make visible the current component by user
          * @return void
          */
         abstract public function render();
-
-        /**
-         * Function used to make the current component not workable
-         * @return void
-         */
-        abstract public function disable();
-
-        /**
-         * Function used to make the current component workable
-         * @return void
-         */
-        abstract public function enable();
-
-        // /**
-        //  * Function used to hide the current component
-        //  * @return void
-        //  */
-        abstract public function hide();
     }

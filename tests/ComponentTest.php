@@ -1,6 +1,5 @@
 <?php
-    require_once __DIR__.'/../src/View/Components/Component.php';
-    
+    use App\Component;
     class ComponentTest extends Component{
         public function __construct() {
             parent::__construct('testBlock');
@@ -10,6 +9,10 @@
             <div class=<?=$this->blockName?>>
                 <?=$this->blockName?>
             </div>  
+            <?php
+        }
+        public function show(){
+            ?>
             <style>
                 <?='.'.$this->blockName?>{
                     display : inline;
