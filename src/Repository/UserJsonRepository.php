@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Exceptions\RepositoryException;
 use App\Model\User;
 use App\Interfaces\UserRepositoryInterface;
+use App\Model\Person;
+use ArrayIterator;
+use Traversable;
 
 /**
  * JSON-based implementation of the UserRepositoryInterface.
@@ -26,7 +29,7 @@ class UserJsonRepository extends JsonRepository implements UserRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function getAll(): \Traversable {
+    public function getAll(): Traversable {
         $data = $this->loadData();
         foreach ($data as $item) {
             yield User::fromArray($item);
@@ -112,13 +115,13 @@ class UserJsonRepository extends JsonRepository implements UserRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByUsername(string $username): ?User {
+    public function findByUsername(string $username): Traversable {
+        $found = [];
         foreach ($this->loadData() as $item) {
-            if (($item[User::KEY_PSEUDO] ?? null) === $username) {
-                return User::fromArray($item);
+            if (stripos(($item[Person::KEY_NAME] ?? ''), $username) !== false) {
+                yield User::fromArray($item);
             }
         }
-        return null;
     }
 
     /**
@@ -140,5 +143,14 @@ class UserJsonRepository extends JsonRepository implements UserRepositoryInterfa
      */
     public function existByUsername(string $username): bool {
         return $this->findByUsername($username) !== null;
+    }
+
+    public function refreshData(){
+        $users = $this->getAll();
+        $data = [];
+        foreach($users as $user){
+            $data[] = $user->toArray();
+        }
+        $this->saveData($data);
     }
 }

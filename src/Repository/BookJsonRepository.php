@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Model\Book;
 use App\Exceptions\RepositoryException;
 use App\Interfaces\BookRepositoryInterface;
+use Traversable;
 
 /**
  * JSON-based implementation of the BookRepositoryInterface.
@@ -27,9 +28,8 @@ class BookJsonRepository extends JsonRepository implements BookRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function getAll(): ?\Traversable {
+    public function getAll(): ?Traversable {
         $data = $this->loadData();
-
         foreach ($data as $item) {
             yield Book::fromArray($item);
         }
@@ -111,14 +111,13 @@ class BookJsonRepository extends JsonRepository implements BookRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByTitle(string $title): ?\Traversable {
+    public function findByTitle(string $title): Traversable {
         $matches = [];
         foreach ($this->loadData() as $item) {
             if (stripos($item[Book::KEY_TITLE] ?? '', $title) !== false) {
-                $matches[] = Book::fromArray($item);
+                yield Book::fromArray($item);
             }
         }
-        return $matches ? new \ArrayIterator($matches) : null;
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Exceptions\RepositoryException;
 use JsonException;
-use RuntimeException;
 
 abstract class JsonRepository{
     /**
@@ -40,7 +39,7 @@ abstract class JsonRepository{
             //If the decodation failed, throw an exception
             throw new RepositoryException('Error occured when decode data : '.$e->getMessage());
         }
-        return is_array($data) ? $data : [$data];
+        return is_array($data) ? $data : [];
     }
 
     /**
@@ -59,5 +58,7 @@ abstract class JsonRepository{
             throw new RepositoryException('Failed to write datas in the file: FilePath : '.$this->filePath);
         }
     }
+
+    abstract public function refreshData();
 
 }

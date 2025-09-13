@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Model\User;
+use Traversable;
 
 /**
  * Interface for a repository that manages User objects.
@@ -82,9 +83,9 @@ interface UserRepositoryInterface {
      * Find a user by their username.
      * 
      * @param string $username The username of the user
-     * @return User|null The User object if found, null otherwise
+     * @return Traversable User's object found
      */
-    public function findByUsername(string $username): ?User;
+    public function findByUsername(string $username): Traversable;
 
     /**
      * Check if a user exists by their unique identifier.

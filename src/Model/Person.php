@@ -14,7 +14,7 @@ use DateTime;
 class Person implements ArrayConvertible{
     private string $name;
     private ?string $surname;
-    private ?\DateTime $birthDate;
+    private ?DateTime $birthDate;
     private ?Gender $gender;
     private ?int $height;
 
@@ -40,7 +40,7 @@ class Person implements ArrayConvertible{
     public function __construct(
         string $name = self::DEFAULT_NAME,
         ?string $surname = null,
-        ?\DateTime $birthDate = null,
+        ?DateTime $birthDate = null,
         ?Gender $gender = null,
         ?int $height = null
     ) {
@@ -54,7 +54,7 @@ class Person implements ArrayConvertible{
     // ===== GETTERS =====
     public function getName(): string { return $this->name; }
     public function getSurname(): ?string { return $this->surname; }
-    public function getBirthDate(): ?\DateTime { return $this->birthDate; }
+    public function getBirthDate(): ?DateTime { return $this->birthDate; }
     public function getGender(): ?Gender { return $this->gender; }
     public function getHeight(): ?int { return $this->height; }
 
@@ -65,14 +65,14 @@ class Person implements ArrayConvertible{
      */
     public function getAge(): ?int {
         if (!$this->birthDate) return null;
-        $now = new \DateTime();
+        $now = new DateTime();
         return $now->diff($this->birthDate)->y;
     }
 
     // ===== SETTERS =====
     public function setName(string $name): void { $this->name = trim($name); }
     public function setSurname(?string $surname): void { $this->surname = trim($surname); }
-    public function setBirthDate(?\DateTime $birthDate): void { $this->birthDate = $birthDate; }
+    public function setBirthDate(?DateTime $birthDate): void { $this->birthDate = $birthDate; }
     public function setGender(?Gender $gender): void { $this->gender = $gender; }
     public function setHeight(?int $height): void { $this->height = $height; }
 
@@ -122,7 +122,6 @@ class Person implements ArrayConvertible{
             Age: $age
             Birth Date: $birthDate
             Height: $height
-            Gender: $gender
-        ";
+            Gender: $gender";
     }
 }

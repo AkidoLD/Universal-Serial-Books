@@ -44,7 +44,7 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
      * @param ?int $height User's height
      */
     public function __construct(
-        ?string $id ,
+        ?string $id,
         string $name,
         string $email,
         string $password,
@@ -57,10 +57,10 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
     ){
         parent::__construct($name, $surname, $birthDate, $gender, $height);
         $this->id = $id ?? (Uuid::uuid4()->toString()); // generate UUID internally
+        $this->regDate = $regDate ?? new DateTime(); // If the registration date is null, use the server time
         $this->setPseudo($pseudo);
         $this->setEmail($email);
         $this->setPassword($password);
-        $this->setRegDate($regDate);
     }
     
     // ===== GETTERS =====
@@ -71,10 +71,10 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
     public function getRegDate(): DateTime { return $this->regDate; }
 
     // ===== SETTERS =====
-    public function setPseudo(?string $pseudo): void { $this->pseudo = trim($pseudo); }
-    public function setEmail(string $email): void { $this->email = trim($email); }
-    public function setPassword(?string $password): void { $this->password = trim($password); }
-    public function setRegDate(?DateTime $regDate): void { $this->regDate = $regDate ?? new DateTime(); }
+    public function setPseudo(?string $pseudo): void { $this->pseudo = $pseudo === null ? null :  trim($pseudo); }
+    public function setEmail(string $email): void { $this->email = $email === null ? null : trim($email); }
+    public function setPassword(?string $password): void { $this->password = $password === null ? null : trim($password); }
+    public function setRegDate(?DateTime $regDate): void { $this->regDate = $regDate; }
 
     // ===== UTILITY METHODS =====
     /**
@@ -89,8 +89,8 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
             self::KEY_EMAIL => $this->getEmail(),
             self::KEY_PASSWORD => $this->getPassword(),
             self::KEY_SURNAME => $this->getSurname(),
-            self::KEY_BIRTHDATE => $this->getBirthDate()?->format('Y-m-d'),
-            self::KEY_REG_DATE => $this->getRegDate()?->format('Y-m-d'),
+            self::KEY_BIRTHDATE => $this->getBirthDate()?->getTimestamp(),
+            self::KEY_REG_DATE => $this->getRegDate()?->getTimestamp(),
             self::KEY_GENDER => $this->getGender()?->value,
             self::KEY_PSEUDO => $this->getPseudo(),
             self::KEY_HEIGHT => $this->getHeight(),
@@ -140,7 +140,6 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
             Registration date : $regDate
             Pseudo: $pseudo
             Email: $email
-            Password: $password
-        ";
+            Password: $password";
     }
 }
