@@ -22,6 +22,7 @@
             $this->workable = true;
             $this->visible = true;
             $this->name = $blockName;
+            $this->id = '';
         }
         
         /**
