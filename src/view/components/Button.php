@@ -1,6 +1,6 @@
 <?php
-    namespace Button;
-    use App\Component;
+    namespace App\View\Components;
+    use App\View\Components\Component;
     /**
      * Class used to represent a button
      */

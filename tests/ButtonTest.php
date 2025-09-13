@@ -1,5 +1,5 @@
 <?php
-    use App\Button;
+    use App\View\Components\Button;
     /**
      * ********** Test step **********
      */

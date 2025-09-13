@@ -2,7 +2,7 @@
     /**
      * Class used to represent a component which can be see by the user
      */
-    namespace Component;
+    namespace App\View\Components;
     abstract class Component{
 
         protected string $name;
