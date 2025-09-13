@@ -1,5 +1,6 @@
 <?php
-    use App\Component;
+    use App\View\Components\Component;
+    require __DIR__.'/../vendor/autoload.php';
     class ComponentTest extends Component{
         public function __construct() {
             parent::__construct('testBlock');

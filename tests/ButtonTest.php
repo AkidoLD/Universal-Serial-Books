@@ -1,5 +1,6 @@
 <?php
-    use App\Button;
+    use App\View\Components\Button;
+    require __DIR__.'/../vendor/autoload.php';
     /**
      * ********** Test step **********
      */

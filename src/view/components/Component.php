@@ -1,8 +1,10 @@
 <?php
+    namespace App\View\Components;
+    require __DIR__.'/../../../vendor/autoload.php';
+
     /**
      * Class used to represent a component which can be see by the user
      */
-    namespace App\Component;
     abstract class Component{
 
         protected string $name;
