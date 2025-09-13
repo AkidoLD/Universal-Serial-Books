@@ -110,7 +110,7 @@ class Book implements ArrayConvertible, JsonSerializable{
     public function setContent(?string $content): void { $this->content = $content; }
     public function setPublicationDate(?DateTime $publicationDate): void { $this->publicationDate = $publicationDate; }
     public function setStorageDate(?DateTime $storageDate): void { $this->storageDate = $storageDate; }
-    public function setPages(?int $pages): void { $this->pages = $pages; }
+    public function setPages(?int $pages): void { $this->pages = abs($pages); }
     public function setGenre(?BookGender $genre): void { $this->genre = $genre; }
 
     /**

@@ -1,11 +1,8 @@
 <?php
 
-use App\Model\Book;
 use App\Repository\BookJsonRepository;
 use App\Services\BookService;
 use Config\Paths;
-use App\Model\Person;
-use App\Enums\BookGender;
 
 $filePath = Paths::BOOK_JSON;
 

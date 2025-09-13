@@ -7,14 +7,18 @@ use App\Model\Book;
 $title = 'Une nuit noir';
 $author = new Person();
 $publicationDate = new DateTime();
-$pages = 300;
 
 $book = new Book(
-    title: $title,
-    author: $author,
-    publicationDate: $publicationDate,
-    pages: $pages,
-    genre: BookGender::FANTASY
+    null,
+    $title,
+    $author,
+    BookGender::BIOGRAPHY,
+    null,
+    null,
+    new DateTime('2021-02-1'),
+    new DateTime(),
+    null,
+    12
 );
 
 echo $book;

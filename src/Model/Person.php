@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Enums\Gender;
 use App\Interfaces\ArrayConvertible;
 use DateTime;
+use InvalidArgumentException;
 
 /**
  * Class Person
@@ -70,11 +71,16 @@ class Person implements ArrayConvertible{
     }
 
     // ===== SETTERS =====
-    public function setName(string $name): void { $this->name = trim($name); }
-    public function setSurname(?string $surname): void { $this->surname = trim($surname); }
+    public function setName(string $name): void {
+        if(empty($name = trim($name))){
+            throw new InvalidArgumentException('The person name can\'t be empty');
+        }
+        $this->name = $name;
+    }
+    public function setSurname(?string $surname): void { $this->surname = $surname !== null ? trim($surname) : null; }
     public function setBirthDate(?DateTime $birthDate): void { $this->birthDate = $birthDate; }
     public function setGender(?Gender $gender): void { $this->gender = $gender; }
-    public function setHeight(?int $height): void { $this->height = $height; }
+    public function setHeight(?int $height): void { $this->height = $height !== null ? abs($height) : null; }
 
     // ===== UTILITY =====
 
