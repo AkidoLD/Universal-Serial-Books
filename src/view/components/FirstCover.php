@@ -11,18 +11,25 @@ use App\View\Components\Component;
         }
 
         public function render(){
+            $this->setStyle();
             ?>
             <div>
-                
+                <?php
+                    $this->renderChilds();
+                ?>
             </div>
             <?php
         }
 
-        public function setStyle(){
-
+        private function setStyle(){
+            ?>
+            <link rel="stylesheet" href="/Universal-Serial-Books/src/View/css/FirstCover.css">
+            <?php
         }
 
-        public function renderChilds(){
-
+        private function renderChilds(){
+            foreach ($this->children as $key => $value){
+                $value->render();
+            }
         }
     }
