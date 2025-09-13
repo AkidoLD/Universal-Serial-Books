@@ -18,9 +18,8 @@
             $this->blockName = $blockName;
             $this->elements = [];
             $this->modifiers = [];
-            $this->workable = true;
-            $this->visible = true;
             $this->name = $blockName;
+            $this->id = '';
         }
         
         /**

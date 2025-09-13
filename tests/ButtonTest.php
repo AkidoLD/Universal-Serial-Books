@@ -4,7 +4,7 @@
     /**
      * ********** Test step **********
      */
-    $test = new Button('Button for test');
+    $test = new Button('Button test');
     $test->render();
     /**
      * ********** End of test **********

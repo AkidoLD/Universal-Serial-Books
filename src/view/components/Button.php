@@ -38,13 +38,25 @@
         public function render(){
             ?>
             <input type="button" 
-                   class="<?=implode('',$this->getClasses())?>" 
-                   value="<?=$this->text?>"
+                class="
+                    <?=$this->blockName?>
+                    <?=implode('', $this->classes)?>
+                    <?=implode('',$this->getClasses())?>
+                    <?=implode('', $this->elements)?>
+                    <?=implode('', $this->modifiers)?>
+                " 
+                id="<?=$this->id?>"
+                name="<?=$this->name?>"
+                value="<?=$this->text?>"
             >
             <?php
                 $this->setStyle();
         }
 
+        /**
+         * This function is used to set the primary styleof buttons to the current button
+         * @return void
+         */
         private function setStyle(){
             ?>
             <link rel="stylesheet" href="/Universal-Serial-Books/src/View/css/Button.css">
