@@ -95,8 +95,8 @@ class UserService {
 
         if(password_verify("", $user->getPassword())){
             throw new ValidationException("The password can't be empty");
-        }   
-
+        }
+        
         $oldUserData = $this->repository->findById($user->getId());
         if ($this->repository->existByEmail($user->getEmail()) &&
             (!$oldUserData || $oldUserData->getEmail() !== $user->getEmail())) {
