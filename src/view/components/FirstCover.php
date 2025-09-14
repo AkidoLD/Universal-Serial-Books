@@ -14,16 +14,7 @@
         public function render(){
             $this->setStyle();
             ?>
-            <div
-                class="
-                    <?=$this->blockName?>
-                    <?=implode('', $this->classes)?>
-                    <?=implode('',$this->getClasses())?>
-                    <?=implode('', $this->elements)?>
-                    <?=implode('', $this->modifiers)?>
-                " 
-                id="<?=$this->id?>"
-            >
+            <div class="<?=$this->blockName?> <?=implode(' ', $this->classes)?> <?=implode(' ',$this->getClasses())?> <?=implode(' ', $this->elements)?> <?=implode(' ', $this->modifiers)?>" id="<?=$this->id?>">
                 <?php
                     $this->renderChilds();
                 ?>

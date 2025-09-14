@@ -37,9 +37,7 @@
          */
         public function render(){
             ?>
-            <input type="button" 
-                   class="<?=implode('',$this->getClasses())?>" 
-                   value="<?=$this->text?>"
+            <input type="button" class="<?=implode('',$this->getClasses())?>" value="<?=$this->text?>">
             >
             <?php
         }
