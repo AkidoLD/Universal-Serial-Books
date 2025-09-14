@@ -14,6 +14,10 @@
             $this->title = $title;
         }
 
+        /**
+         * Function used to make dialog box visible and his children by user
+         * @return void
+         */
         public function render(){
             $this->setStyle();
             ?>
@@ -32,12 +36,20 @@
             <?php
         }
 
-        public function renderChilds(){
+        /**
+         * Function used to set visible all the children of the current dialog box
+         * @return void
+         */
+        private function renderChilds(){
             foreach($this->children as $child){
                 $child->render();
             }
         }
 
+        /**
+         * Function used to link dialog box to his style stocked on css file
+         * @return void
+         */
         public function setStyle(){
             ?>
                 <link rel="stylesheet" href="/Universal-Serial-Books/public/assets/css/DialogBox.css">
