@@ -59,7 +59,7 @@
          */
         private function setStyle(){
             ?>
-            <link rel="stylesheet" href="/Universal-Serial-Books/src/View/css/Button.css">
+            <link rel="stylesheet" href="/Universal-Serial-Books/public/assets/css/Button.css">
             <?php
         }
     }
