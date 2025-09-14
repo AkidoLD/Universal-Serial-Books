@@ -33,7 +33,7 @@
 
         private function setStyle(){
             ?>
-            <link rel="stylesheet" href="/Universal-Serial-Books/src/View/css/FirstCover.css">
+            <link rel="stylesheet" href="/Universal-Serial-Books/public/assets/css/FirstCover.css">
             <?php
         }
 
