@@ -26,7 +26,7 @@ $userRepo->refreshData();
 
 $needle = "M";
 
-echo "<h3>Found User with name contain <span style='color: red'>".$needle."</span></h3>";
+echo "<h3>User's founded with name contain <span style='color: red'>".$needle."</span></h3>";
 
 $data = $userRepo->findByUsername($needle);
 

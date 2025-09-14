@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Exceptions\RepositoryException;
 use App\Interfaces\UserRepositoryInterface;
 use App\Model\User;
 use App\Exceptions\ValidationException;
+use Exception;
+use Traversable;
 
 class UserService {
     private UserRepositoryInterface $repository;
@@ -16,9 +19,9 @@ class UserService {
     /**
      * Retrieve all users.
      *
-     * @return \Traversable A collection of User objects
+     * @return Traversable A collection of User objects
      */
-    public function getAllUsers(): \Traversable {
+    public function getAllUsers(): Traversable {
         return $this->repository->getAll();
     }
 
@@ -41,6 +44,17 @@ class UserService {
     public function findUserByEmail(string $email): ?User {
         return $this->repository->findByEmail($email);
     }
+    
+    /**
+     * Search for user whose name contains `name`
+     * 
+     * @param string $name The string to found
+     * 
+     * @return Traversable List of User's found
+     */
+    public function findUsersByName(string $name): Traversable{
+        return $this->repository->findByUsername($name);
+    }
 
     /**
      * Count all users.
@@ -58,17 +72,38 @@ class UserService {
      * @throws ValidationException If the user data is invalid or email already exists
      */
     public function addUser(User $user): void {
-        // Validate user data
-        $this->validateUser($user, isNew: true);
-
+        $this->validateUser($user);
         // Attempt to add user to repository
         try {
             $this->repository->add($user);
-        } catch (\Exception $e) {
-            // Re-throw as validation or repository exception if needed
+        } catch (RepositoryException $e) {
             throw new ValidationException("Failed to add user: " . $e->getMessage(), 0, $e);
         }
     }
+
+    /**
+     * Validate the user information before add it
+     * 
+     * @param \App\Model\User $user The user to validate
+     * @throws \App\Exceptions\ValidationException
+     * @return void
+     */
+    public function validateUser(User $user){
+        if(empty($user->getName())){
+            throw new ValidationException("The user name can't be empty");
+        }
+
+        if(password_verify("", $user->getPassword())){
+            throw new ValidationException("The password can't be empty");
+        }   
+
+        $oldUserData = $this->repository->findById($user->getId());
+        if ($this->repository->existByEmail($user->getEmail()) &&
+            (!$oldUserData || $oldUserData->getEmail() !== $user->getEmail())) {
+            throw new ValidationException("This user email is already used");
+        }
+
+    }    
 
     /**
      * Update an existing user.
@@ -82,13 +117,13 @@ class UserService {
             throw new ValidationException("Cannot update: user does not exist");
         }
 
-        // Validate user data
-        $this->validateUser($user, isNew: false);
+        //Valide the user email
+        $this->validateUser($user);
 
         // Attempt to update user in repository
         try {
             $this->repository->update($user);
-        } catch (\Exception $e) {
+        } catch (RepositoryException $e) {
             throw new ValidationException("Failed to update user: " . $e->getMessage(), 0, $e);
         }
     }
@@ -106,28 +141,4 @@ class UserService {
         $this->repository->delete($userId);
     }
 
-    /**
-     * Validate user data.
-     *
-     * @param User $user
-     * @param bool $isNew True if adding a new user, false if updating
-     * @throws ValidationException
-     */
-    private function validateUser(User $user, bool $isNew): void {
-        if (empty($user->getEmail())) {
-            throw new ValidationException("Email cannot be empty");
-        }
-
-        if ($isNew && $this->repository->existByEmail($user->getEmail())) {
-            throw new ValidationException("The email is already used by another user");
-        }
-
-        if (empty($user->getName())) {
-            throw new ValidationException("Username cannot be empty");
-        }
-
-        if ($isNew && $this->repository->existByUsername($user->getName())) {
-            throw new ValidationException("The username is already used by another user");
-        }
-    }
 }

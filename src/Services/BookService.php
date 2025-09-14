@@ -29,7 +29,7 @@ class BookService {
      * @return Book|null
      */
     public function findBookById(string $id): ?Book {
-        return $this->repository->findByIsbn($id);
+        return $this->repository->findById($id);
     }
 
     /**
@@ -49,7 +49,7 @@ class BookService {
      */
     public function addBook(Book $book): void {
         // Validate book data
-        $this->validateBook($book, isNew: true);
+        $this->validateBook($book);
 
         // Attempt to add book to repository
         try {
@@ -67,12 +67,12 @@ class BookService {
      */
     public function updateBook(Book $book): void {
         // Ensure the book exists
-        if (!$this->repository->existByIsbn($book->getIsbn())) {
+        if (!$this->repository->existById($book->getId())) {
             throw new ValidationException("Cannot update: book does not exist");
         }
 
         // Validate book data
-        $this->validateBook($book, isNew: false);
+        $this->validateBook($book);
 
         // Attempt to update book in repository
         try {
@@ -99,18 +99,19 @@ class BookService {
      * Validate book data.
      *
      * @param Book $book
-     * @param bool $isNew True if adding a new book, false if updating
      * @throws ValidationException
      */
-    private function validateBook(Book $book, bool $isNew): void {
+    private function validateBook(Book $book): void {
         if (empty($book->getTitle())) {
             throw new ValidationException("Book title cannot be empty");
         }
+        //Get old book information if already existe in the repository
+        $oldBookData = $this->repository->findById($book->getId());
 
-        if ($isNew && $this->repository->existByIsbn($book->getIsbn())) {
+        //Verify information
+        if ($this->repository->existByIsbn($book->getIsbn()) && 
+            (!$oldBookData || $oldBookData->getIsbn() !== $book->getIsbn())) {
             throw new ValidationException("The ISBN is already used for another book");
         }
-
-        // Add other validations here (author, year, etc.) if needed
     }
 }

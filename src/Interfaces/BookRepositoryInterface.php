@@ -52,6 +52,14 @@ interface BookRepositoryInterface {
     public function count(): int;
 
     /**
+     * Find a book by its ID
+     * 
+     * @param string $id
+     * @return Book|null
+     */
+    public function findById(string $id): ?Book;
+
+    /**
      * Find a book by its ISBN (unique code for books).
      *
      * @param string $isbn The ISBN code
