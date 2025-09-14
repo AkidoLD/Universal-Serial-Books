@@ -8,35 +8,25 @@ use Config\Paths;
 $filePath = Paths::BOOK_JSON;
 
 $repo = new BookJsonRepository($filePath);
-$book = new Book(
-    null,
-    'Akido',
-    'Alex',
-    null,
-);
 
-$repo->refreshData();
+// $books = require_once __DIR__."/../config/BooksList.php"; // For load fake books, uncomment this line
+
+
+foreach($books as $book) $repo->add($book);
+
 
 $data = $repo->getAll();
 
-
-$bookID = "f3d97653-82db-4496-8076-8a2af36fdf3a";
-
-$booktitle = "La nuit";
-
-echo $repo->count();
+echo "<p>The repository contain ".$repo->count(). " books</p>";
 
 echoBR();
 
-echo $repo->existById($bookID);
+$booktitle = "vie";
 
-$found = $repo->findByTitle($booktitle) ?? [];
+echo "<h3>Liste des livres dont le nom contient \"<strong>".$booktitle."\"</strong></h3>";
 
-prettyPrint ($repo->findById($bookID) ?? "N\A");
 
-foreach($data as $book) {
-    // echo "<pre>";
-    // var_dump($book);
-    // echo "</pre>";
-    prettyPrint(($book));
-}
+$foundBooks = $repo->findByTitle($booktitle);
+
+foreach($foundBooks as $book) prettyPrint($book);
+

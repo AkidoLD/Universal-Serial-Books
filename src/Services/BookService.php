@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Interfaces\BookRepositoryInterface;
 use App\Model\Book;
 use App\Exceptions\ValidationException;
+use Traversable;
 
 class BookService {
     private BookRepositoryInterface $repository;
@@ -16,9 +17,9 @@ class BookService {
     /**
      * Retrieve all books.
      *
-     * @return \Traversable A collection of Book objects
+     * @return Traversable A collection of Book objects
      */
-    public function getAllBooks(): \Traversable {
+    public function getAllBooks(): Traversable {
         return $this->repository->getAll();
     }
 

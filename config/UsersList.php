@@ -6,7 +6,7 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 return [
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Wouagang',
         'alexrayan@gmail.com',
         password_hash('tkz21', PASSWORD_DEFAULT),
@@ -18,7 +18,7 @@ return [
         1.74,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Ngono',
         'marie.ngono@example.com',
         password_hash('pass123', PASSWORD_DEFAULT),
@@ -30,7 +30,7 @@ return [
         1.65,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Tchouameni',
         'paul.tchoua@example.com',
         password_hash('azerty', PASSWORD_DEFAULT),
@@ -42,7 +42,7 @@ return [
         1.80,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Essomba',
         'jess.essomba@example.com',
         password_hash('mypwd', PASSWORD_DEFAULT),
@@ -54,7 +54,7 @@ return [
         1.70,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Mbarga',
         'richard.mbarga@example.com',
         password_hash('secure01', PASSWORD_DEFAULT),
@@ -66,7 +66,7 @@ return [
         1.82,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Abena',
         'celine.abena@example.com',
         password_hash('p@ssword', PASSWORD_DEFAULT),
@@ -78,7 +78,7 @@ return [
         1.68,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Nkoum',
         'yvan.nkoum@example.com',
         password_hash('toto123', PASSWORD_DEFAULT),
@@ -90,7 +90,7 @@ return [
         1.75,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Kamdem',
         'aline.kamdem@example.com',
         password_hash('alinepw', PASSWORD_DEFAULT),
@@ -102,7 +102,7 @@ return [
         1.60,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Fokou',
         'bernard.fokou@example.com',
         password_hash('bernardpw', PASSWORD_DEFAULT),
@@ -114,7 +114,7 @@ return [
         1.78,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Mbah',
         'sandra.mbah@example.com',
         password_hash('sandrapw', PASSWORD_DEFAULT),
@@ -126,7 +126,7 @@ return [
         1.64,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Kouatchou',
         'patrick.kouatchou@example.com',
         password_hash('patrickpw', PASSWORD_DEFAULT),
@@ -138,7 +138,7 @@ return [
         1.85,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Ndiaye',
         'amina.ndiaye@example.com',
         password_hash('aminapw', PASSWORD_DEFAULT),
@@ -150,7 +150,7 @@ return [
         1.62,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Koumba',
         'serge.koumba@example.com',
         password_hash('sergepw', PASSWORD_DEFAULT),
@@ -162,7 +162,7 @@ return [
         1.77,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Ngongang',
         'stephanie.ngongang@example.com',
         password_hash('stephpw', PASSWORD_DEFAULT),
@@ -174,7 +174,7 @@ return [
         1.66,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Djoumessi',
         'frederic.djoumessi@example.com',
         password_hash('fredpw', PASSWORD_DEFAULT),
@@ -186,7 +186,7 @@ return [
         1.79,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Ebongue',
         'chloe.ebongue@example.com',
         password_hash('chloepw', PASSWORD_DEFAULT),
@@ -198,7 +198,7 @@ return [
         1.63,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Nguema',
         'olivier.nguema@example.com',
         password_hash('olivierpw', PASSWORD_DEFAULT),
@@ -210,7 +210,7 @@ return [
         1.81,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Mebenga',
         'valerie.mebenga@example.com',
         password_hash('valeriepw', PASSWORD_DEFAULT),
@@ -222,7 +222,7 @@ return [
         1.67,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Onana',
         'kevin.onana@example.com',
         password_hash('kevinpw', PASSWORD_DEFAULT),
@@ -234,7 +234,7 @@ return [
         1.83,
     ),
     new User(
-        Uuid::uuid4()->toString(),
+        null,
         'Talla',
         'noemie.talla@example.com',
         password_hash('noemiepw', PASSWORD_DEFAULT),
