@@ -8,10 +8,12 @@
     class DialogBox extends Component{
 
         private string $title;
+        private $content;
 
         public function __construct(string $blockName = 'dialog', string $title) {
-            parent::__construct($blockName,['dialog']);
+            parent::__construct($blockName, ['dialog']);
             $this->title = $title;
+            $this->content = '';
         }
 
         /**
@@ -24,9 +26,10 @@
             <div class="overlay" id="overlay" >
                 <div class="<?=implode(' ', $this->classes)?> <?=implode(' ', $this->elements)?> <?=$this->blockName?>" id="<?=$this->id?>" >
                     <div class="dialog_header">
-                        <?=$this->title?>
+                        <h2><?=$this->title?></h2>
                     </div>
                     <div class="dialog_content">
+                        <?=$this->content?>
                     <?php
                         $this->renderChilds();
                     ?>
@@ -54,5 +57,9 @@
             ?>
                 <link rel="stylesheet" href="/Universal-Serial-Books/public/assets/css/DialogBox.css">
             <?php
+        }
+
+        public function setContent(string $newContent){
+            $this->content = $newContent;
         }
     }
