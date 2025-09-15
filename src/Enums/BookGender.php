@@ -9,30 +9,14 @@ namespace App\Enums;
  * the genre of a book.
  */
 enum BookGender: string {
-    /** Science Fiction genre */
     case SCIENCE_FICTION = 'Science Fiction';
-
-    /** Fantasy genre */
     case FANTASY = 'Fantasy';
-
-    /** Romance genre */
     case ROMANCE = 'Romance';
-
-    /** Mystery genre */
     case MYSTERY = 'Mystery';
-
-    /** Thriller genre */
     case THRILLER = 'Thriller';
-
-    /** Non-Fiction genre */
     case NON_FICTION = 'Non-Fiction';
-
-    /** History genre */
     case HISTORY = 'History';
-
-    /** Biography genre */
     case BIOGRAPHY = 'Biography';
-
-    /** Children genre */
     case CHILDREN = 'Children';
+    case ADVENTURE = 'Aventure';
 }

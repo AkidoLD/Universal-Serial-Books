@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Interfaces;
 
 use App\Model\Book;
 
@@ -16,9 +16,9 @@ interface BookRepositoryInterface {
     /**
      * Retrieve all books from the repository.
      *
-     * @return \Traversable<Book> A collection of Book objects
+     * @return ?\Traversable<Book> A collection of Book objects
      */
-    public function getAll(): \Traversable;
+    public function getAll(): ?\Traversable;
 
     /**
      * Delete a book from the repository.
@@ -52,6 +52,14 @@ interface BookRepositoryInterface {
     public function count(): int;
 
     /**
+     * Find a book by its ID
+     * 
+     * @param string $id
+     * @return Book|null
+     */
+    public function findById(string $id): ?Book;
+
+    /**
      * Find a book by its ISBN (unique code for books).
      *
      * @param string $isbn The ISBN code
@@ -65,7 +73,7 @@ interface BookRepositoryInterface {
      * @param string $title The title of the book
      * @return \Traversable<Book> A collection of matching books
      */
-    public function findByTitle(string $title): \Traversable;
+    public function findByTitle(string $title): ?\Traversable;
 
     /**
      * Check if a book exists by its ISBN.
@@ -74,4 +82,11 @@ interface BookRepositoryInterface {
      * @return bool True if a book with this ISBN exists, false otherwise
      */
     public function existByIsbn(string $isbn): bool;
+
+    /**
+     * Check if a book exists by its Id
+     * @param string $id
+     * @return bool
+     */
+    public function existById(string $id): bool;
 }

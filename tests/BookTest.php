@@ -6,17 +6,19 @@ use App\Model\Book;
 
 $title = 'Une nuit noir';
 $author = new Person();
-$publicationDate = new DateTime('2010-04-09');
-$page = 300;
+$publicationDate = new DateTime();
 
-$date = new DateTime();
 $book = new Book(
+    null,
     $title,
     $author,
-    $publicationDate,
+    BookGender::BIOGRAPHY,
     null,
-    300,
-    BookGender::FANTASY,
+    null,
+    new DateTime('2021-02-1'),
+    new DateTime(),
+    null,
+    12
 );
 
 echo $book;

@@ -1,19 +1,21 @@
 <?php
 
-use App\model\User;
+use App\Enums\Gender;
+use App\Model\User;
 
 $date = new DateTime();
 
 $user = new User(
-    '1',
-    'Wouagang',
+    null,
+    "Wouagang Alex",
+    'alexrayan@gmail.com',
+    password_hash('asd', PASSWORD_DEFAULT),
     'Rayan',
-    null,
-    'alexrayan14231423@gmail.com',
-    '0001',
-    $date,
-    null,
-    null
+    new DateTime('2004-02-03'),
+    new DateTime(),
+    Gender::MALE,
+    'AkidoLD',
+    1.14,
 );
 
 echo $user;
