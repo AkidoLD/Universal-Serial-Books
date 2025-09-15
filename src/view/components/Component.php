@@ -18,6 +18,7 @@
             $this->blockName = $blockName;
             $this->elements = [];
             $this->modifiers = [];
+            $this->children = [];
             $this->name = $blockName;
             $this->id = '';
         }
