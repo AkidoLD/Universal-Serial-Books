@@ -56,7 +56,7 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
         ?int $height = null,
     ){
         parent::__construct($name, $surname, $birthDate, $gender, $height);
-        $this->id = $id ?? (Uuid::uuid4()->toString()); // generate UUID internally
+        $this->id = $id ?? Uuid::uuid4()->toString(); // generate UUID internally
         $this->regDate = $regDate ?? new DateTime(); // If the registration date is null, use the server time
         $this->setPseudo($pseudo);
         $this->setEmail($email);

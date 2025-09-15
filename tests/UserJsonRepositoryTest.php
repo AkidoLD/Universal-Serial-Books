@@ -24,7 +24,7 @@ try {
 
 $userRepo->refreshData();
 
-$needle = "M";
+$needle = "an";
 
 echo "<h3>User's founded with name contain <span style='color: red'>".$needle."</span></h3>";
 
