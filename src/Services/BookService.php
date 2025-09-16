@@ -34,6 +34,26 @@ class BookService {
     }
 
     /**
+     * Find a book by its title
+     * 
+     * @param string $title
+     * @return Book|null
+     */
+    public function findBookByTitle(string $title): ?Book{
+        return $this->repository->findByTitle($title);
+    }
+
+    /**
+     * Search a books by their title
+     * 
+     * @param string $title
+     * @return Traversable<int|string, Book>
+     */
+    public function searchBookByTitle(string $title): Traversable{
+        return $this->repository->searchByTitle($title);
+    }
+
+    /**
      * Count all books.
      *
      * @return int
@@ -113,6 +133,11 @@ class BookService {
         if ($this->repository->existByIsbn($book->getIsbn()) && 
             (!$oldBookData || $oldBookData->getIsbn() !== $book->getIsbn())) {
             throw new ValidationException("The ISBN is already used for another book");
+        }
+
+        if($this->repository->existByTitle($book->getTitle()) &&
+            !$oldBookData || $oldBookData->getId() !== $book->getTitle()){
+            throw new ValidationException("The title is already used for another book");
         }
     }
 }

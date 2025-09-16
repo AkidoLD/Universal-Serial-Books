@@ -115,8 +115,16 @@ class UserJsonRepository extends JsonRepository implements UserRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByUsername(string $username): Traversable {
-        $found = [];
+    public function findByUsername(string $username): ?User {
+        foreach ($this->loadData() as $item) {
+            if ($item[Person::KEY_NAME] === $username) {
+                return User::fromArray($item);
+            }
+        }
+        return null;
+    }
+
+    public function searchByUserName(string $username): Traversable{
         foreach ($this->loadData() as $item) {
             if (stripos(($item[Person::KEY_NAME] ?? ''), $username) !== false) {
                 yield User::fromArray($item);
@@ -145,6 +153,9 @@ class UserJsonRepository extends JsonRepository implements UserRepositoryInterfa
         return $this->findByUsername($username) !== null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function refreshData(){
         $users = $this->getAll();
         $data = [];

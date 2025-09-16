@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Model\Book;
+use Traversable;
 
 /**
  * Interface for a repository that manages Book objects.
@@ -16,9 +17,9 @@ interface BookRepositoryInterface {
     /**
      * Retrieve all books from the repository.
      *
-     * @return ?\Traversable<Book> A collection of Book objects
+     * @return Traversable<Book> A collection of Book objects
      */
-    public function getAll(): ?\Traversable;
+    public function getAll(): Traversable;
 
     /**
      * Delete a book from the repository.
@@ -68,12 +69,28 @@ interface BookRepositoryInterface {
     public function findByIsbn(string $isbn): ?Book;
 
     /**
-     * Find books by their title (titles may not be unique).
+     * Find a book by its title.
+     * 
+     * This method uses a strict comparison to search for a book
+     *      with exactly the same title as the given parameter.
      *
-     * @param string $title The title of the book
-     * @return \Traversable<Book> A collection of matching books
+     * @param string $title The exact title of the book
+     * @return ?Book The matching book, or null if none found
      */
-    public function findByTitle(string $title): ?\Traversable;
+    public function findByTitle(string $title): ?Book;
+
+
+    /**
+     * Search books by their title.
+     * 
+     * This method performs a partial (case-insensitive) search on the title string
+     *      and returns all books that contain the given substring.
+     * 
+     * @param string $title The substring to search for in the book titles
+     * @return Traversable<Book> A list of books whose titles match the search
+     */
+    public function searchByTitle(string $title): Traversable;
+
 
     /**
      * Check if a book exists by its ISBN.
@@ -89,4 +106,12 @@ interface BookRepositoryInterface {
      * @return bool
      */
     public function existById(string $id): bool;
+
+    /**
+     * Check if a book exists by its title
+     * 
+     * @param string $title
+     * @return bool
+     */
+    public function existByTitle(string $title): bool;
 }

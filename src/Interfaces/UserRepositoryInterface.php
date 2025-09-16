@@ -21,9 +21,9 @@ interface UserRepositoryInterface {
      * necessarily loading all of them into memory at once.
      * Useful for large datasets or memory-efficient processing.
      * 
-     * @return \Traversable<User> A collection of User objects
+     * @return Traversable<User> A collection of User objects
      */
-    public function getAll(): \Traversable;
+    public function getAll(): Traversable;
 
     /**
      * Delete a user from the repository.
@@ -80,12 +80,23 @@ interface UserRepositoryInterface {
     public function findByEmail(string $email): ?User;
 
     /**
-     * Find a user by their username.
+     * Find a user by its username.
      * 
      * @param string $username The username of the user
-     * @return Traversable User's object found
+     * @return ?User User object found
      */
-    public function findByUsername(string $username): Traversable;
+    public function findByUsername(string $username): ?User;
+
+    /**
+     * Find User's by their username
+     * 
+     * This method performs a partial (case-insensitive) search on the username string
+     *      and returns all users that contain the given substring.
+     * 
+     * @param string $username
+     * @return Traversable
+     */
+    public function searchByUserName(string $username): Traversable;
 
     /**
      * Check if a user exists by their unique identifier.

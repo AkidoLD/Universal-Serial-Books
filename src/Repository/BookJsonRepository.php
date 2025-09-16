@@ -28,7 +28,7 @@ class BookJsonRepository extends JsonRepository implements BookRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function getAll(): ?Traversable {
+    public function getAll(): Traversable {
         $data = $this->loadData();
         foreach ($data as $item) {
             yield Book::fromArray($item);
@@ -111,8 +111,19 @@ class BookJsonRepository extends JsonRepository implements BookRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByTitle(string $title): Traversable {
-        $matches = [];
+    public function findByTitle(string $title): ?Book {
+        foreach ($this->loadData() as $item) {
+            if ($item[Book::KEY_TITLE] === $title) {
+                return Book::fromArray($item);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function searchByTitle(string $title): Traversable{
         foreach ($this->loadData() as $item) {
             if (stripos($item[Book::KEY_TITLE] ?? '', $title) !== false) {
                 yield Book::fromArray($item);
@@ -131,6 +142,16 @@ class BookJsonRepository extends JsonRepository implements BookRepositoryInterfa
         return $this->findById($id) !== null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function existByTitle(string $title): bool{
+        return $this->findByTitle($title) !== null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function refreshData(){
         $books = $this->getAll();
         $data = [];

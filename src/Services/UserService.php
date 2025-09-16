@@ -46,14 +46,24 @@ class UserService {
     }
     
     /**
-     * Search for user whose name contains `name`
+     * Find the user by its name
      * 
      * @param string $name The string to found
      * 
-     * @return Traversable List of User's found
+     * @return ?User User found
      */
-    public function findUsersByName(string $name): Traversable{
+    public function findUsersByName(string $name): ?User{
         return $this->repository->findByUsername($name);
+    }
+
+    /**
+     * Search for user whose name contains `name`
+     * 
+     * @param string $name
+     * @return Traversable
+     */
+    public function searchUSerByName(string $name): Traversable{
+        return $this->repository->searchByUserName($name);
     }
 
     /**
