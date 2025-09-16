@@ -17,7 +17,7 @@ class Person implements ArrayConvertible{
     private ?string $surname;
     private ?DateTime $birthDate;
     private ?Gender $gender;
-    private ?int $height;
+    private ?float $height;
 
     // ===== JSON KEYS =====
     public const KEY_NAME = 'name';
@@ -36,14 +36,14 @@ class Person implements ArrayConvertible{
      * @param string|null $surname Surname of the person
      * @param \DateTime|null $birthDate Birth date
      * @param Gender|null $gender Gender
-     * @param int|null $height Height in cm
+     * @param float|null $height Height in cm
      */
     public function __construct(
         string $name = self::DEFAULT_NAME,
         ?string $surname = null,
         ?DateTime $birthDate = null,
         ?Gender $gender = null,
-        ?int $height = null
+        ?float $height = null
     ) {
         $this->name = trim($name);
         $this->surname = trim($surname);
@@ -57,7 +57,7 @@ class Person implements ArrayConvertible{
     public function getSurname(): ?string { return $this->surname; }
     public function getBirthDate(): ?DateTime { return $this->birthDate; }
     public function getGender(): ?Gender { return $this->gender; }
-    public function getHeight(): ?int { return $this->height; }
+    public function getHeight(): ?float { return $this->height; }
 
     /**
      * Calculate the age of the person
@@ -80,14 +80,14 @@ class Person implements ArrayConvertible{
     public function setSurname(?string $surname): void { $this->surname = $surname !== null ? trim($surname) : null; }
     public function setBirthDate(?DateTime $birthDate): void { $this->birthDate = $birthDate; }
     public function setGender(?Gender $gender): void { $this->gender = $gender; }
-    public function setHeight(?int $height): void { $this->height = $height !== null ? abs($height) : null; }
+    public function setHeight(?float $height): void { $this->height = $height !== null ? abs($height) : null; }
 
     // ===== UTILITY =====
 
     /**
      * Convert the `Person` instance to an `Array`
      * 
-     * @return array<int|string|null>
+     * @return array
      */
     public function toArray(): array{
         return [

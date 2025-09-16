@@ -41,7 +41,7 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
      * @param ?DateTime $regDate User's registration date
      * @param ?Gender $gender User's gender
      * @param ?string $pseudo Optional username
-     * @param ?int $height User's height
+     * @param ?float $height User's height
      */
     public function __construct(
         ?string $id,
@@ -53,7 +53,7 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
         ?DateTime $regDate = null,
         ?Gender $gender = null,
         ?string $pseudo = null,
-        ?int $height = null,
+        ?float $height = null,
     ){
         parent::__construct($name, $surname, $birthDate, $gender, $height);
         $this->id = $id ?? Uuid::uuid4()->toString(); // generate UUID internally

@@ -7,7 +7,7 @@ use App\Repository\UserJsonRepository;
 use Config\Paths;
 
 
-// $usersList = require_once __DIR__."/../config/UsersList.php"; //Remove the comment to load Users. Don't forget to comment it after 🥲
+$usersList = require_once __DIR__."/../config/UsersList.php"; //Remove the comment to load Users. Don't forget to comment it after 🥲
 
 $userRepo = new UserJsonRepository(Paths::USER_JSON);
 
