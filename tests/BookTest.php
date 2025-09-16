@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__."/../vendor/autoload.php";
+
 use App\Enums\BookGender;
 use App\Model\Person;
 use App\Model\Book;

@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__."/../src/Core/Helpers.php";
-use App\Model\Book;
+require_once __DIR__."/../vendor/autoload.php";
+
 use App\Repository\BookJsonRepository;
 use Config\Paths;
 

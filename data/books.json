@@ -24,18 +24,6 @@
         "pages": 412
     },
     {
-        "id": "32ddc142-a242-4c8f-82b5-1337c67cd210",
-        "title": "L'\u00e9p\u00e9e des royaumes",
-        "author": "Terry Glade",
-        "gender": "Fantasy",
-        "cover": null,
-        "content": "Excellent r\u00e9cit",
-        "publicationDate": 1351900800,
-        "storageDate": 1757852490,
-        "isbn": null,
-        "pages": 389
-    },
-    {
         "id": "4b28519d-1149-4ecb-bab1-961a7b1db2a2",
         "title": "Amour en automne",
         "author": "Clara Love",
@@ -192,18 +180,6 @@
         "pages": 350
     },
     {
-        "id": "c62a797d-f08c-456d-9050-f698088be250",
-        "title": "D\u00e9couvertes scientifiques",
-        "author": "Prof. Know",
-        "gender": "Non-Fiction",
-        "cover": null,
-        "content": "\u00c9ducatif",
-        "publicationDate": 1520812800,
-        "storageDate": 1757852490,
-        "isbn": null,
-        "pages": 420
-    },
-    {
         "id": "6f01aea0-79cf-41d2-8f9e-ca5c64900ff1",
         "title": "R\u00e9volutions et empires",
         "author": "Histo Grande",
@@ -238,5 +214,149 @@
         "storageDate": 1757852490,
         "isbn": null,
         "pages": 130
+    },
+    {
+        "id": "670d797d-fa1c-41fa-a092-a3dea36a8e97",
+        "title": "La modification d'un livre",
+        "author": "AkidoLD",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969005,
+        "isbn": "b4bf0775-be61-4ac1-9446-7592116cffea",
+        "pages": 12
+    },
+    {
+        "id": "62484d43-47cf-4a7f-9edb-d34fba78daa1",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969641,
+        "isbn": "749d0ab5-62fe-4615-a8b3-ebad71398df3",
+        "pages": 12
+    },
+    {
+        "id": "256f30bd-d7a4-480d-b327-66ddebca105c",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969664,
+        "isbn": "cba254a8-6b0b-463a-8a7e-2cd639f7b383",
+        "pages": 12
+    },
+    {
+        "id": "9b7cdd53-3116-4456-ba06-b24f40339b92",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969665,
+        "isbn": "d86eb3e3-9511-4d11-880e-707d74fdc744",
+        "pages": 12
+    },
+    {
+        "id": "75f3fe8a-9f59-49fb-81b3-6fced3c6f677",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969683,
+        "isbn": "977fbdac-1439-4b95-a794-a83eceedc203",
+        "pages": 12
+    },
+    {
+        "id": "0ea111ff-c082-4ac1-a66c-2fb93d9fef6c",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969688,
+        "isbn": "ad73807a-72bb-4062-9cff-f97ea2618964",
+        "pages": 12
+    },
+    {
+        "id": "0718ac00-cc89-4acf-ab14-0f0eb7b2c357",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757969988,
+        "isbn": "338f1ba6-d23b-4579-8f93-feb294509658",
+        "pages": 12
+    },
+    {
+        "id": "860d3e06-5d9e-43f3-8f9b-4d76e4907cb0",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757970150,
+        "isbn": "d5eac093-84e7-45bd-ae4e-d5427fb45bb6",
+        "pages": 12
+    },
+    {
+        "id": "6a592469-3f71-4961-839a-dd2402d714f6",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757970195,
+        "isbn": "42373930-bf25-4db2-b27f-008c1d809b58",
+        "pages": 12
+    },
+    {
+        "id": "21a5bf16-1a06-40da-9dfa-a7a9fbfa73a8",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757971449,
+        "isbn": "3bf73dbe-a1f1-4edf-bb78-ed4cd417d2bf",
+        "pages": 12
+    },
+    {
+        "id": "62d6b60d-3338-4aa9-90e7-a9b96c379205",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757971451,
+        "isbn": "069ba91b-cdf2-4ead-abd8-361200a01016",
+        "pages": 12
+    },
+    {
+        "id": "38de1780-92fd-4863-8074-a867a23df46f",
+        "title": "Une nuit noir",
+        "author": "Akira Toriyama",
+        "gender": "Biography",
+        "cover": null,
+        "content": null,
+        "publicationDate": 1612137600,
+        "storageDate": 1757971459,
+        "isbn": "be4c504c-2da2-4b4d-abe5-955887cbe141",
+        "pages": 12
     }
 ]
