@@ -136,7 +136,7 @@ class BookService {
         }
 
         if($this->repository->existByTitle($book->getTitle()) &&
-            !$oldBookData || $oldBookData->getId() !== $book->getTitle()){
+            (!$oldBookData || $oldBookData->getId() !== $book->getTitle())){
             throw new ValidationException("The title is already used for another book");
         }
     }

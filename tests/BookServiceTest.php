@@ -25,9 +25,10 @@ echoBR();
 
 //==== Test Book modification =======//
 
-$title = 'Une nuit noir';
+$title = 'Un jour blue';
 $author = "Akira Toriyama";
 $publicationDate = new DateTime();
+$uuid = false ? "5f08eeab-d6a6-45cb-b86f-dd55dad0c4ea" : Uuid::uuid4()->toString();
 
 $book = new Book(
     null,
@@ -38,7 +39,7 @@ $book = new Book(
     null,
     new DateTime('2021-02-1'),
     new DateTime(),
-    Uuid::uuid4()->toString(),
+    $uuid,
     12
 );
 
