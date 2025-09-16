@@ -102,15 +102,16 @@ class UserService {
         if(empty($user->getName())){
             throw new ValidationException("The user name can't be empty");
         }
-
-        if(password_verify("", $user->getPassword())){
-            throw new ValidationException("The password can't be empty");
-        }
         
         $oldUserData = $this->repository->findById($user->getId());
         if ($this->repository->existByEmail($user->getEmail()) &&
             (!$oldUserData || $oldUserData->getEmail() !== $user->getEmail())) {
-            throw new ValidationException("This user email is already used");
+            throw new ValidationException("This user email is already taken");
+        }
+
+        if($this->repository->existByUsername($user->getName()) &&
+            (!$oldUserData || $oldUserData->getName() !== $user->getName())    ) {
+            throw new ValidationException('This user name is already taken');
         }
 
     }    
