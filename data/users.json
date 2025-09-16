@@ -238,5 +238,17 @@
         "gender": "female",
         "pseudo": "NoeT",
         "height": 1
+    },
+    {
+        "id": "48a8b99e-9a6b-4a91-b197-1a2a5db85280",
+        "name": "Salomon",
+        "email": "salomon@gmail.com",
+        "password": "$2y$12$tuAxFEs2jelMtbbN\/2Wc7er3or359kglecNrcPVOeGzR6omhC5nMW",
+        "surname": "Romeo",
+        "birthDate": 867024000,
+        "reg_date": 1758013705,
+        "gender": "male",
+        "pseudo": "Salopard",
+        "height": 1
     }
 ]

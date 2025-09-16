@@ -4,72 +4,164 @@ require_once __DIR__."/../vendor/autoload.php";
 require_once __DIR__."/../src/Core/Helpers.php";
 
 use App\Enums\BookGender;
+use App\Exceptions\ValidationException;
 use App\Model\Book;
 use App\Repository\BookJsonRepository;
 use App\Services\BookService;
 use Config\Paths;
 use Ramsey\Uuid\Uuid;
 
+//=========================
+// CONFIGURATION TEST
+//=========================
 $filePath = Paths::BOOK_JSON;
+$repository = new BookJsonRepository($filePath);
+$service    = new BookService($repository);
+$displayLimit = 5;
 
-$repo = new BookJsonRepository($filePath);
+//=========================
+// VARIABLES POUR TESTS
+//=========================
+// Ajout d’un livre
+$testTitle       = 'Un jour bleu';
+$testAuthor      = 'Akira Toriyama';
+$testGender      = BookGender::BIOGRAPHY;
+$testIsbn        = Uuid::uuid4()->toString();
+$testPageCount   = 300;
+$testPubDate     = new DateTime('2021-02-01');
 
-$service = new BookService($repo);
+// Mise à jour du livre
+$updateTitle     = "La modification d'un livre";
+$updateAuthor    = "AkidoLD";
+$updateIsbn      = Uuid::uuid4()->toString();
 
-//===== Test delete book ======//
-$deleteBook = "32ddc142-a242-4c8f-82b5-1337c67cd210";
+// Recherche
+$searchTitle     = "La";
+$findId          = "5fceb8cc-aaef-4a56-a113-a916aa99a7c8";
+$findTitle       = "Le pays des enfants";
 
-echo "La base de donnee a ".$service->bookCount()." livre enregistre";
+//=========================
+// ICONES ET COULEURS
+//=========================
+define('ICON_SUCCESS', '✅');
+define('ICON_INFO', 'ℹ️');
+define('ICON_ERROR', '❌');
 
-echoBR();
+//=========================
+// TEST GET ALL BOOKS
+//=========================
+echo H3o.ICON_INFO." Get all books".H3c;
+echo "The application contains ". $service->bookCount() ." books".BR;
 
-//==== Test Book modification =======//
+$books = $service->getAllBooks();
+echo "Display first $displayLimit books:".BR;
+echo "<ul>";
+$i = 0;
+foreach($books as $book){
+    if($i++ >= $displayLimit) break;
+    echo "<li>".$book->getTitle()."</li>";
+}
+echo "</ul>";
+echo "End of section".BR;
+echo "============================".BR;
 
-$title = 'Un jour blue';
-$author = "Akira Toriyama";
-$publicationDate = new DateTime();
-$uuid = false ? "5f08eeab-d6a6-45cb-b86f-dd55dad0c4ea" : Uuid::uuid4()->toString();
+//=========================
+// TEST ADD BOOK
+//=========================
+echo H3o.ICON_INFO." Test adding a book".H3c;
 
-$book = new Book(
+$newBook = new Book(
     null,
-    $title,
-    $author,
-    BookGender::BIOGRAPHY,
+    $testTitle,
+    $testAuthor,
+    $testGender,
     null,
     null,
-    new DateTime('2021-02-1'),
+    $testPubDate,
     new DateTime(),
-    $uuid,
-    12
+    $testIsbn,
+    $testPageCount
 );
 
-$service->addBook($book);
-
-//====== Test Find Book =======//
-
-echo "Test de la recherche de livre : ";
-echoBR();
-//
-echo "-> Find by ID"; 
-echoBR();
-$id = "670d797d-fa1c-41fa-a092-a3dea36a8e97";
-$foundbook = $service->findBookById($id);
-
-echo $foundbook ? "Le livre ".$foundbook->getTitle()." a ete trouve." : "Aucun film trouve";
-echoBR();
-
-if($foundbook) prettyPrint($foundbook);
-
-//===== Test book modification
-
-echo "Test de modification d'un livre";
-
-if($foundbook){
-    $newBook = clone $foundbook;
-    $newBook->setAuthor('AkidoLD');
-    $newBook->setTitle('La modification d\'un livre');
-    $newBook->setIsbn("749d0ab5-62fe-4615-a8b3-ebad71398df3");
-    $service->updateBook($newBook);
+try {
+    $service->addBook($newBook);
+    echo ICON_SUCCESS." Book '{$newBook->getTitle()}' added successfully!".BR;
+    prettyPrint($newBook);
+} catch (ValidationException $e) {
+    echo ICON_ERROR." Error adding book: ".$e->getMessage().BR;
 }
 
-//======= End Test ========//
+echo "===============================".BR;
+
+//=========================
+// TEST UPDATE BOOK
+//=========================
+echo H3o.ICON_INFO." Test updating a book".H3c;
+
+$updateBook = clone $newBook;
+$updateBook->setAuthor($updateAuthor);
+$updateBook->setTitle($updateTitle);
+$updateBook->setIsbn($updateIsbn);
+
+try {
+    $service->updateBook($updateBook);
+    echo ICON_SUCCESS." Book updated successfully.".BR;
+    prettyPrint($updateBook);
+} catch (ValidationException $e) {
+    echo ICON_ERROR." Error updating book: ".$e->getMessage().BR;
+}
+echo "===============================".BR;
+
+//=========================
+// TEST DELETE BOOK
+//=========================
+echo H3o.ICON_INFO." Test deleting a book".H3c;
+
+$deleteId = $newBook->getId();
+try {
+    $service->deleteBookById($deleteId);
+    echo ICON_SUCCESS." Book '{$newBook->getTitle()}' deleted successfully".BR;
+} catch (ValidationException $e) {
+    echo ICON_ERROR." Error deleting book: ".$e->getMessage().BR;
+}
+echo "===============================".BR;
+
+//=========================
+// TEST SEARCH BOOKS BY TITLE
+//=========================
+echo H3o.ICON_INFO." Test searching books by title".H3c;
+
+$foundBooks = $service->searchBooksByTitle($searchTitle);
+if(isEmptyTraversable($foundBooks)) {
+    echo ICON_ERROR." No books found with title containing '{$searchTitle}'".BR;
+} else {
+    echo ICON_SUCCESS." Books found:".BR;
+    echo "<ul>";
+    foreach($foundBooks as $book) {
+        echo "<li>".$book->getTitle()."</li>";
+    }
+    echo "</ul>";
+}
+echo "==============================".BR;
+
+//=========================
+// TEST FIND BOOK
+//=========================
+echo H3o.ICON_INFO." Test finding books".H3c;
+
+// By ID
+$foundBook = $service->findBookById($findId);
+if(!$foundBook) echo ICON_ERROR." Book with ID {$findId} not found".BR;
+else {
+    echo ICON_SUCCESS." Book found by ID: ".BR;
+    prettyPrint($foundBook);
+}
+
+// By Title
+$foundBook = $service->findBookByTitle($findTitle);
+if(!$foundBook) echo ICON_ERROR." No books found with title '{$findTitle}'".BR;
+else {
+    echo ICON_SUCCESS." Books found by title: ".BR;
+    prettyPrint($foundBook);
+}
+echo "==============================".BR;

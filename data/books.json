@@ -214,41 +214,5 @@
         "storageDate": 1757852490,
         "isbn": null,
         "pages": 130
-    },
-    {
-        "id": "670d797d-fa1c-41fa-a092-a3dea36a8e97",
-        "title": "La modification d'un livre",
-        "author": "AkidoLD",
-        "gender": "Biography",
-        "cover": null,
-        "content": null,
-        "publicationDate": 1612137600,
-        "storageDate": 1757969005,
-        "isbn": "b4bf0775-be61-4ac1-9446-7592116cffea",
-        "pages": 12
-    },
-    {
-        "id": "fbfcecd3-4c69-4fa8-ba4a-2c6d3bdd04ce",
-        "title": "Une nuit noir",
-        "author": "Akira Toriyama",
-        "gender": "Biography",
-        "cover": null,
-        "content": null,
-        "publicationDate": 1612137600,
-        "storageDate": 1758005587,
-        "isbn": "5f08eeab-d6a6-45cb-b86f-dd55dad0c4ea",
-        "pages": 12
-    },
-    {
-        "id": "1dc2387f-e334-448a-87ad-a5b9a34dccba",
-        "title": "Un jour blue",
-        "author": "Akira Toriyama",
-        "gender": "Biography",
-        "cover": null,
-        "content": null,
-        "publicationDate": 1612137600,
-        "storageDate": 1758005839,
-        "isbn": "f85f47eb-4115-49dd-9075-3d4da4498aed",
-        "pages": 12
     }
 ]
