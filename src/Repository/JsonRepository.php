@@ -59,6 +59,14 @@ abstract class JsonRepository{
         }
     }
 
+    /**
+     * Refresh the JSON file to update the stored data.
+     * 
+     * This method is useful when you change the keys in your array
+     *      and want the JSON data to be updated automatically.
+     * 
+     * @return void
+     */
     abstract public function refreshData();
 
 }
