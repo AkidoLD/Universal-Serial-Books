@@ -10,7 +10,7 @@ $filePath = Paths::BOOK_JSON;
 
 $repo = new BookJsonRepository($filePath);
 
-$books = require_once __DIR__."/../config/BooksList.php"; // For load fake books, uncomment this line
+// $books = require_once __DIR__."/../config/BooksList.php"; // For load fake books, uncomment this line
 
 
 foreach($books as $book) $repo->add($book);

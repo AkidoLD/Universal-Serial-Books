@@ -106,6 +106,7 @@ $updateUser = clone $newUser;
 $updateUser->setGender(Gender::FEMALE);
 $updateUser->setName($updateName);
 $updateUser->setEmail($updateEmail);
+$updateUser->setPseudo('The tank');
 
 echo "Attempting to update user info...".BR;
 
