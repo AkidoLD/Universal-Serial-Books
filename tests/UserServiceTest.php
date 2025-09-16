@@ -1,6 +1,7 @@
 <?php
 
-use App\Model\User;
+require_once __DIR__."/../vendor/autoload.php";
+
 use App\Repository\UserJsonRepository;
 use App\Services\UserService;
 use Config\Paths;

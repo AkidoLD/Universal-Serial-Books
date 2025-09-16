@@ -1,8 +1,14 @@
 <?php
 
+require_once __DIR__."/../vendor/autoload.php";
+require_once __DIR__."/../src/Core/Helpers.php";
+
+use App\Enums\BookGender;
+use App\Model\Book;
 use App\Repository\BookJsonRepository;
 use App\Services\BookService;
 use Config\Paths;
+use Ramsey\Uuid\Uuid;
 
 $filePath = Paths::BOOK_JSON;
 
@@ -10,15 +16,59 @@ $repo = new BookJsonRepository($filePath);
 
 $service = new BookService($repo);
 
-// $books = $service->getAllBooks();
+//===== Test delete book ======//
+$deleteBook = "32ddc142-a242-4c8f-82b5-1337c67cd210";
 
-// foreach($books as $book){
-//     $service->addBook($book);
-// }
+echo "La base de donnee a ".$service->bookCount()." livre enregistre";
 
+echoBR();
 
-$deleteBook = "1bb6c619-76c4-4dd0-91d1-4a1f07c1d11b";
+//==== Test Book modification =======//
 
-$service->deleteBookById($deleteBook);
+$title = 'Une nuit noir';
+$author = "Akira Toriyama";
+$publicationDate = new DateTime();
 
-foreach($service->getAllBooks() as $book) echo $book;
+$book = new Book(
+    null,
+    $title,
+    $author,
+    BookGender::BIOGRAPHY,
+    null,
+    null,
+    new DateTime('2021-02-1'),
+    new DateTime(),
+    Uuid::uuid4()->toString(),
+    12
+);
+
+$service->addBook($book);
+
+//====== Test Find Book =======//
+
+echo "Test de la recherche de livre : ";
+echoBR();
+//
+echo "-> Find by ID"; 
+echoBR();
+$id = "670d797d-fa1c-41fa-a092-a3dea36a8e97";
+$foundbook = $service->findBookById($id);
+
+echo $foundbook ? "Le livre ".$foundbook->getTitle()." a ete trouve." : "Aucun film trouve";
+echoBR();
+
+if($foundbook) prettyPrint($foundbook);
+
+//===== Test book modification
+
+echo "Test de modification d'un livre";
+
+if($foundbook){
+    $newBook = clone $foundbook;
+    $newBook->setAuthor('AkidoLD');
+    $newBook->setTitle('La modification d\'un livre');
+    $newBook->setIsbn("749d0ab5-62fe-4615-a8b3-ebad71398df3");
+    $service->updateBook($newBook);
+}
+
+//======= End Test ========//
