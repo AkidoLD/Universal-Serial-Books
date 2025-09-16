@@ -62,7 +62,7 @@ class UserService {
      * @param string $name
      * @return Traversable
      */
-    public function searchUSerByName(string $name): Traversable{
+    public function searchUsersByName(string $name): Traversable{
         return $this->repository->searchByUserName($name);
     }
 

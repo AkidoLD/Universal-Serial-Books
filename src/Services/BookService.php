@@ -49,7 +49,7 @@ class BookService {
      * @param string $title
      * @return Traversable<int|string, Book>
      */
-    public function searchBookByTitle(string $title): Traversable{
+    public function searchBooksByTitle(string $title): Traversable{
         return $this->repository->searchByTitle($title);
     }
 
@@ -136,7 +136,7 @@ class BookService {
         }
 
         if($this->repository->existByTitle($book->getTitle()) &&
-            (!$oldBookData || $oldBookData->getId() !== $book->getTitle())){
+            (!$oldBookData || $oldBookData->getTitle() !== $book->getTitle())){
             throw new ValidationException("The title is already used for another book");
         }
     }
