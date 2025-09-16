@@ -28,6 +28,8 @@ class Person implements ArrayConvertible{
 
     //Constantes
     public const DEFAULT_NAME = "No name";
+    public const MAXIMUM_AGE = 150;
+    public const MINIMUM_AGE = 10;
 
     /**
      * Person constructor.
@@ -45,11 +47,11 @@ class Person implements ArrayConvertible{
         ?Gender $gender = null,
         ?float $height = null
     ) {
-        $this->name = trim($name);
-        $this->surname = trim($surname);
-        $this->birthDate = $birthDate;
-        $this->gender = $gender;
-        $this->height = $height;
+        $this->setName($name);
+        $this->setSurname($surname);
+        $this->setBirthDate($birthDate);
+        $this->setGender($gender);
+        $this->setHeight($height);
     }
 
     // ===== GETTERS =====
@@ -72,13 +74,53 @@ class Person implements ArrayConvertible{
 
     // ===== SETTERS =====
     public function setName(string $name): void {
-        if(empty($name = trim($name))){
-            throw new InvalidArgumentException('The person name can\'t be empty');
+        $trimmed = trim($name);
+        if ($trimmed === '') {
+            throw new InvalidArgumentException("The person's name cannot be empty.");
         }
-        $this->name = $name;
+        $this->name = $trimmed;
     }
-    public function setSurname(?string $surname): void { $this->surname = $surname !== null ? trim($surname) : null; }
-    public function setBirthDate(?DateTime $birthDate): void { $this->birthDate = $birthDate; }
+        
+    public function setSurname(?string $surname): void { 
+        if ($surname !== null) {
+            $surnameTrimmed = trim($surname);
+            if ($surnameTrimmed === '') {
+                throw new InvalidArgumentException('The person surname cannot be empty.');
+            }
+            $surname = $surnameTrimmed;
+        }
+        $this->surname = $surname;
+    }
+
+    public function setBirthDate(?DateTime $birthDate): void {
+        if ($birthDate === null) {
+            $this->birthDate = null;
+            return;
+        }
+    
+        $now = new DateTime();
+        $age = $now->diff($birthDate)->y; // nombre d'années
+    
+        
+        if ($age < 0) {
+            throw new InvalidArgumentException("Birth date cannot be in the future.");
+        }
+
+        if ($age < self::MINIMUM_AGE) {
+            throw new InvalidArgumentException(
+                "Birth date cannot be less than " . self::MINIMUM_AGE . " years ago."
+            );
+        }
+        
+        if ($age > self::MAXIMUM_AGE) {
+            throw new InvalidArgumentException(
+                "Birth date cannot be more than " . self::MAXIMUM_AGE . " years ago."
+            );
+        }        
+    
+        $this->birthDate = $birthDate;
+    }
+    
     public function setGender(?Gender $gender): void { $this->gender = $gender; }
     public function setHeight(?float $height): void { $this->height = $height !== null ? abs($height) : null; }
 

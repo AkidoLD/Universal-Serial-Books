@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Enums\Gender;
 use App\Interfaces\ArrayConvertible;
+use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 use App\Model\Person;
 use App\Interfaces\JsonSerializable;
@@ -17,8 +18,8 @@ use DateTime;
  */
 class User extends Person implements ArrayConvertible, JsonSerializable {
     private readonly string $id; // Immutable user identifier
-    private string $email;
-    private string $password; // Already hashed password
+    private ?string $email;
+    private ?string $password;
     private ?DateTime $regDate;
     private ?string $pseudo;
 
@@ -35,8 +36,8 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
      * @param ?string $id User identifier, UUID v4 will be generated if null
      * @param string $name User's first name
      * @param ?string $surname User's surname
-     * @param string $email User's email
-     * @param string $password Already hashed password
+     * @param ?string $email User's email
+     * @param ?string $password User's password
      * @param ?\DateTime $birthDate User's birth date
      * @param ?DateTime $regDate User's registration date
      * @param ?Gender $gender User's gender
@@ -46,8 +47,8 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
     public function __construct(
         ?string $id,
         string $name,
-        string $email,
-        string $password,
+        ?string $email = null,
+        ?string $password = null,
         ?string $surname = null,
         ?DateTime $birthDate = null,
         ?DateTime $regDate = null,
@@ -72,8 +73,17 @@ class User extends Person implements ArrayConvertible, JsonSerializable {
 
     // ===== SETTERS =====
     public function setPseudo(?string $pseudo): void { $this->pseudo = $pseudo === null ? null :  trim($pseudo); }
-    public function setEmail(string $email): void { $this->email = $email === null ? null : trim($email); }
-    public function setPassword(?string $password): void { $this->password = $password === null ? null : trim($password); }
+    public function setEmail(?string $email): void { 
+        if ($email !== null) {
+            $email = trim($email);
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                throw new InvalidArgumentException("The email is invalid");
+            }
+        }
+        $this->email = $email; 
+    }
+    
+    public function setPassword(?string $password): void { $this->password = ($password !== null) ? trim($password) : null; }
     public function setRegDate(?DateTime $regDate): void { $this->regDate = $regDate; }
 
     // ===== UTILITY METHODS =====
