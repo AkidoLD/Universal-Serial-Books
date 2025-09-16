@@ -7,7 +7,7 @@ use App\Model\Person;
 use App\Model\Book;
 
 $title = 'Une nuit noir';
-$author = new Person();
+$author = "Alamastas";
 $publicationDate = new DateTime();
 
 $book = new Book(
