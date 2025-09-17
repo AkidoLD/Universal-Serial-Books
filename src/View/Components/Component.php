@@ -1,10 +1,21 @@
 <?php
+<<<<<<< HEAD
     namespace App\View\Components;
     require __DIR__.'/../../../vendor/autoload.php';
 
     /**
      * Class used to represent a component which can be see by the user
      */
+<<<<<<<< HEAD:src/View/Components/Component.php
+========
+    namespace App\View\Components;
+>>>>>>>> view:src/view/components/Component.php
+=======
+    /**
+     * Class used to represent a component which can be see by the user
+     */
+    namespace App\View\Components;
+>>>>>>> view
     abstract class Component{
 
         protected string $name;
@@ -20,9 +31,9 @@
             $this->blockName = $blockName;
             $this->elements = [];
             $this->modifiers = [];
-            $this->workable = true;
-            $this->visible = true;
+            $this->children = [];
             $this->name = $blockName;
+            $this->id = '';
         }
         
         /**
