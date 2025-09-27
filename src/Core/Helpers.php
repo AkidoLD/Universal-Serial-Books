@@ -10,8 +10,9 @@ function echoBR(){
 define('BR', "<br>");
 define('H3o', '<h3>');
 define('H3c', '</h3>');
-function prettyPrint(string $value){
-    echo "<pre>".$value."</pre>";
+
+function prettyPrint(string $value, string $balise = 'pre' ){
+    echo "<$balise>".$value."</$balise>";
 }
 
 /**
@@ -23,4 +24,9 @@ function prettyPrint(string $value){
 function isEmptyTraversable(Traversable $traversable): bool{
     foreach ($traversable as $item) return false;
     return true;
+}
+
+function echoPre(){
+    static $isOpen = false;
+    echo $isOpen = !$isOpen ? "<pre>" : "</pre>";
 }

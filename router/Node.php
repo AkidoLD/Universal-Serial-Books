@@ -2,6 +2,7 @@
 
 namespace Router;
 
+use App\Exceptions\NodeException;
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
@@ -26,7 +27,7 @@ class Node implements Countable, ArrayAccess, IteratorAggregate {
     }
     
     public function addChild(Node $child): void {
-        $this->children[] = $child;
+        $this->children[$child->getKey()] = $child;
     }
 
     public function addChildren(array $children): void {
@@ -34,7 +35,7 @@ class Node implements Countable, ArrayAccess, IteratorAggregate {
             if (!($child instanceof Node)) {
                 throw new InvalidArgumentException("All children must be instances of Node");
             }
-            $this->children[] = $child;
+            $this->addChild($child);
         }
     }
     
@@ -46,22 +47,82 @@ class Node implements Countable, ArrayAccess, IteratorAggregate {
         return $this->handler;
     }
 
+    /**
+     * Get `Node` child
+     * 
+     * If the Node don't have child, the method return null
+     * 
+     * @exception NodeException If the Node have childrens and the child key is not found
+     * 
+     * @param string $key
+     * 
+     * @return ?Node
+     */
     public function getChild(string $key): ?Node {
-        foreach ($this->children as $child) {
-            if ($child->getKey() === $key) {
-                return $child;
-            }
+        if(!$this->haveChildren()) {
+            return null;
         }
-        return null;
+        if(!($child = $this->children[$key] ?? null)){
+            throw new NodeException("The child with the key : $key had not been found.");
+        }
+        return $child;
     }
 
-    public function __invoke(...$args) {
-        if ($this->handler) {
-            return ($this->handler)(...$args);
-        }
-        return null;
+    /**
+     * Get all children of the Node
+     * 
+     * @return array
+     */
+    public function getChildren(): array{
+        return $this->children;
     }
-    
+
+    /**
+     * Summary of isLeaf
+     * @return bool
+     */
+    public function haveChildren(): bool{
+        return !empty($this->children);
+    }
+
+    public function childrenCount(): int{
+        return count($this->children);
+    }
+
+    /**
+     * Execute the callaback function
+     * 
+     * This method allow to execute the callback function handler
+     * to the `Node`
+     * 
+     * @param mixed $args A list of arguments to put in the callback like is parameters 
+     * 
+     * @throws NodeException If not callback handler on the `Node`
+     * 
+     * @return mixed the return of the callback
+     */
+    public function execute(...$args){
+        if (!$this->handler) {
+            throw new NodeException("This Node don't have callback handler");
+        }
+        //
+        return ($this->handler)(...$args);
+    }
+
+    /**
+     * An alias of execute method
+     * 
+     * @param array $args
+     * @return mixed
+     */
+    public function __invoke(...$args) {
+        $this->execute(...$args);
+    }
+
+    //Implementation of Stringable
+    public function __toString(): string {
+        return " Node key : $this->key ";
+    }
 
     // Implementation of Countable
     public function count(): int {
@@ -70,7 +131,7 @@ class Node implements Countable, ArrayAccess, IteratorAggregate {
 
     // Implementation of ArrayAccess
     public function offsetGet(mixed $offset): ?Node {
-        return $this->children[$offset] ?? null;
+        return $this->getChild($offset);
     }
 
     public function offsetExists(mixed $offset): bool {
@@ -83,9 +144,10 @@ class Node implements Countable, ArrayAccess, IteratorAggregate {
                 'Error: Only instances of Node can be added as children.'
             );
         }
-
+        //Check if the offset it is not set
         if ($offset === null) {
-            $this->children[] = $value;
+            //If the offset it is not set, use the Node key like the offset
+            $this->addChild($value);
         } else {
             $this->children[$offset] = $value;
         }
