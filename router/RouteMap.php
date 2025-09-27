@@ -1,4 +1,6 @@
 <?php
+
+namespace Router;
 /**
  * Represents an HTTP route as a list of URI segments.
  *
@@ -21,12 +23,18 @@ class RouteMap {
     private $cursor;
 
     /**
+     * @var string Current URI string
+     */
+    private string $URI;
+
+    /**
      * Constructs a new RouteMap instance from a given URI.
      *
      * @param string $URI The request URI (e.g. "/auth/login/edit")
      */
-    public function __construct(string $URI) {
-        $this->segments = $this->parsePath($URI);
+    public function __construct(?string $URI = null) {
+        $this->segments = $URI ? $this->parsePath($URI) : null;
+        $this->URI = $URI;
         $this->cursor = 0;
     }
 
@@ -47,6 +55,27 @@ class RouteMap {
     }
 
     /**
+     * Set the URI string
+     * 
+     * @param string $URI
+     * @return void
+     */
+    public function setURI(string $URI){
+        $this->segments = $this->parsePath($URI);
+        $this->URI = $URI;
+        $this->reset();
+    }
+
+    /**
+     * Get the URI string
+     * 
+     * @return string
+     */
+    public function getURI(): string{
+        return $this->URI;
+    }
+    
+    /**
      * Resets the cursor back to the beginning of the route.
      *
      * @return void
@@ -60,17 +89,17 @@ class RouteMap {
      *
      * @return bool True if there is a next segment, false otherwise
      */
-    public function hasNext() {
+    public function hasNext(): bool {
         return sizeof($this->segments) > ($this->cursor);
     }
 
     /**
      * Returns the next segment and moves the cursor forward.
      *
-     * @return string|false The next segment or false if none left
+     * @return string|null The next segment or false if none left
      */
     public function next() {
-        return $this->hasNext() ? $this->segments[$this->cursor++] : false;
+        return $this->hasNext() ? $this->segments[$this->cursor++] : null;
     }
 
     /**
@@ -80,5 +109,17 @@ class RouteMap {
      */
     public function current() {
         return $this->cursor;
+    }
+
+    public function getUnusedSegments(): array{
+        $unusedSegments = [];
+        while($tmp = $this->next()){
+            $unusedSegments[] = $tmp;
+        }
+        return $unusedSegments;
+    }
+
+    public function __invoke(): ?string{
+        return $this->next();
     }
 }
