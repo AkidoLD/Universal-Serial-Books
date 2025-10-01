@@ -9,7 +9,6 @@ use App\Model\User;
 use App\Repository\UserJsonRepository;
 use App\Services\UserService;
 use Config\Paths;
-use Traversable;
 
 //=========================
 // CONFIGURATION TEST
