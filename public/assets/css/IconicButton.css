@@ -1,0 +1,14 @@
+.iconicButton{
+    max-height: 200px;
+    max-width: 200px;
+    height: 140px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+}
+.iconicButton > img{
+    height: 100px;
+    width: 100px;
+}
