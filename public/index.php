@@ -2,6 +2,11 @@
 
 require_once __DIR__."/../vendor/autoload.php";
 
+use SimpleRoute\Router\Node;
+
+$root = new Node('root', function() {echo "Hello word";});
+
+$root->execute();
 ?>
 
 <!DOCTYPE html>

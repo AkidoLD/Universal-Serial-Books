@@ -6,7 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitcf888e76942046fda33b1cd5ba937248
 {
+    public static $files = array (
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'SimpleRoute\\' => 12,
+        ),
+        'R' => 
+        array (
+            'Ramsey\\Uuid\\' => 12,
+            'Ramsey\\Collection\\' => 18,
+        ),
+        'C' => 
+        array (
+            'Config\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Brick\\Math\\' => 11,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -14,6 +35,26 @@ class ComposerStaticInitcf888e76942046fda33b1cd5ba937248
     );
 
     public static $prefixDirsPsr4 = array (
+        'SimpleRoute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/akido-ld/simple-route/src',
+        ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Ramsey\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
+        'Config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
